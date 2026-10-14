@@ -4,12 +4,10 @@ import { useApp } from '../context'
 import { CONTACT_EMAIL } from '../i18n/content'
 import {
   COUNTRIES,
-  DIAL_CODES,
-  countryById,
   detectCountryId,
-  digitsOnly,
-  formatPhone,
-  isValidNationalNumber,
+  isValidInternationalPhone,
+  limitPhoneInput,
+  phoneExample,
   type CountryId,
 } from '../lib/countries'
 import { GOOGLE_FORM_OPTIONS, submitGoogleForm } from '../lib/googleForm'
@@ -27,8 +25,7 @@ export function PreOrder() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [countryId, setCountryId] = useState<CountryId>(detectedCountry)
-  const [dialCode, setDialCode] = useState(countryById(detectedCountry).dial)
-  const [nationalPhone, setNationalPhone] = useState('')
+  const [phone, setPhone] = useState('')
   const [gender, setGender] = useState('')
   const [details, setDetails] = useState('')
   const [submitted, setSubmitted] = useState(false)
@@ -36,12 +33,16 @@ export function PreOrder() {
   const [error, setError] = useState('')
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({})
 
+  const examplePhone = phoneExample(countryId)
+
   const validate = (): FieldErrors => {
     const next: FieldErrors = {}
     if (name.trim().length < 2) next.name = t.preorder.errorName
     if (!EMAIL_PATTERN.test(email.trim())) next.email = t.preorder.errorEmail
     if (!countryId) next.country = t.preorder.errorCountry
-    if (!isValidNationalNumber(countryId, nationalPhone)) next.phone = t.preorder.errorPhone
+    if (!isValidInternationalPhone(phone)) {
+      next.phone = t.preorder.errorPhone.replace('{example}', examplePhone)
+    }
     if (!gender) next.gender = t.preorder.errorGender
     if (details.trim().length < 10) next.details = t.preorder.errorDetails
     return next
@@ -49,8 +50,7 @@ export function PreOrder() {
 
   const onCountryChange = (nextId: CountryId) => {
     setCountryId(nextId)
-    setDialCode(countryById(nextId).dial)
-    setFieldErrors((current) => ({ ...current, country: undefined, phone: undefined }))
+    setFieldErrors((current) => ({ ...current, country: undefined }))
   }
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -73,18 +73,17 @@ export function PreOrder() {
         email,
         country: countryLabel ?? countryId,
         gender,
-        phone: formatPhone(dialCode, nationalPhone),
+        phone: phone.trim(),
         accountType: persona,
         details,
       })
       setSubmitted(true)
       setName('')
       setEmail('')
-      setNationalPhone('')
+      setPhone('')
       setGender('')
       setDetails('')
       setCountryId(detectedCountry)
-      setDialCode(countryById(detectedCountry).dial)
       setFieldErrors({})
     } catch {
       setError(t.preorder.submitFailed)
@@ -277,40 +276,22 @@ export function PreOrder() {
                         <label className={labelClass} htmlFor="contact-phone">
                           {t.preorder.phoneLabel}
                         </label>
-                        <div className="flex gap-2">
-                          <select
-                            aria-label={t.preorder.dialLabel}
-                            className={`${fieldClass} dial-select w-[7.25rem] shrink-0 px-3 ${fieldErrors.phone ? invalidClass : ''}`}
-                            disabled={submitting}
-                            value={dialCode}
-                            onChange={(event) => {
-                              setDialCode(event.target.value)
-                              setFieldErrors((current) => ({ ...current, phone: undefined }))
-                            }}
-                          >
-                            {DIAL_CODES.map((code) => (
-                              <option key={code} value={code}>
-                                {code}
-                              </option>
-                            ))}
-                          </select>
-                          <input
-                            className={`${fieldClass} ${fieldErrors.phone ? invalidClass : ''}`}
-                            disabled={submitting}
-                            id="contact-phone"
-                            name="phone"
-                            inputMode="numeric"
-                            placeholder={t.preorder.phonePlaceholder}
-                            required
-                            type="tel"
-                            value={nationalPhone}
-                            aria-invalid={Boolean(fieldErrors.phone)}
-                            onChange={(event) => {
-                              setNationalPhone(digitsOnly(event.target.value))
-                              setFieldErrors((current) => ({ ...current, phone: undefined }))
-                            }}
-                          />
-                        </div>
+                        <input
+                          className={`${fieldClass} ${fieldErrors.phone ? invalidClass : ''}`}
+                          disabled={submitting}
+                          id="contact-phone"
+                          name="phone"
+                          maxLength={20}
+                          placeholder={examplePhone}
+                          required
+                          type="tel"
+                          value={phone}
+                          aria-invalid={Boolean(fieldErrors.phone)}
+                          onChange={(event) => {
+                            setPhone(limitPhoneInput(event.target.value))
+                            setFieldErrors((current) => ({ ...current, phone: undefined }))
+                          }}
+                        />
                         {fieldErrors.phone ? <p className={errorClass}>{fieldErrors.phone}</p> : null}
                       </div>
                       <div className="flex flex-col gap-2">

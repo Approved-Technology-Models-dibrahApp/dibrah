@@ -5,45 +5,19 @@ export type CountryOption = {
   dial: string
   en: string
   ar: string
-  nationalMin: number
-  nationalMax: number
 }
 
 export const COUNTRIES: CountryOption[] = [
-  { id: 'SA', dial: '+966', en: 'Saudi Arabia', ar: 'المملكة العربية السعودية', nationalMin: 9, nationalMax: 9 },
-  { id: 'AE', dial: '+971', en: 'United Arab Emirates', ar: 'الإمارات العربية المتحدة', nationalMin: 8, nationalMax: 9 },
-  { id: 'KW', dial: '+965', en: 'Kuwait', ar: 'الكويت', nationalMin: 8, nationalMax: 8 },
-  { id: 'BH', dial: '+973', en: 'Bahrain', ar: 'البحرين', nationalMin: 8, nationalMax: 8 },
-  { id: 'QA', dial: '+974', en: 'Qatar', ar: 'قطر', nationalMin: 8, nationalMax: 8 },
-  { id: 'OM', dial: '+968', en: 'Oman', ar: 'عُمان', nationalMin: 8, nationalMax: 8 },
-  { id: 'EG', dial: '+20', en: 'Egypt', ar: 'مصر', nationalMin: 9, nationalMax: 10 },
-  { id: 'JO', dial: '+962', en: 'Jordan', ar: 'الأردن', nationalMin: 8, nationalMax: 9 },
-  { id: 'OTHER', dial: '+966', en: 'Other', ar: 'دولة أخرى', nationalMin: 6, nationalMax: 15 },
+  { id: 'SA', dial: '+966', en: 'Saudi Arabia', ar: 'المملكة العربية السعودية' },
+  { id: 'AE', dial: '+971', en: 'United Arab Emirates', ar: 'الإمارات العربية المتحدة' },
+  { id: 'KW', dial: '+965', en: 'Kuwait', ar: 'الكويت' },
+  { id: 'BH', dial: '+973', en: 'Bahrain', ar: 'البحرين' },
+  { id: 'QA', dial: '+974', en: 'Qatar', ar: 'قطر' },
+  { id: 'OM', dial: '+968', en: 'Oman', ar: 'عُمان' },
+  { id: 'EG', dial: '+20', en: 'Egypt', ar: 'مصر' },
+  { id: 'JO', dial: '+962', en: 'Jordan', ar: 'الأردن' },
+  { id: 'OTHER', dial: '+', en: 'Other', ar: 'دولة أخرى' },
 ]
-
-export const DIAL_CODES = [
-  '+966',
-  '+971',
-  '+965',
-  '+973',
-  '+974',
-  '+968',
-  '+20',
-  '+962',
-  '+964',
-  '+961',
-  '+963',
-  '+967',
-  '+970',
-  '+972',
-  '+90',
-  '+92',
-  '+91',
-  '+44',
-  '+1',
-  '+33',
-  '+49',
-] as const
 
 const TIMEZONE_COUNTRY: Record<string, CountryId> = {
   'Asia/Riyadh': 'SA',
@@ -74,20 +48,34 @@ export function detectCountryId(): CountryId {
   return 'SA'
 }
 
-export function digitsOnly(value: string) {
-  const digits = value.replace(/\D/g, '')
-  return digits.startsWith('0') ? digits.slice(1) : digits
+export function phoneExample(countryId: CountryId) {
+  const dial = countryById(countryId).dial
+  return dial === '+' ? '+966 5XXXXXXX' : `${dial} 5XXXXXXX`
 }
 
-export function formatPhone(dial: string, national: string) {
-  const local = digitsOnly(national)
-  return local ? `${dial}${local}` : dial
+const MAX_PHONE_DIGITS = 15
+
+export function limitPhoneInput(value: string) {
+  let digits = 0
+  let result = ''
+  for (const char of value) {
+    if (char === '+' && result.length === 0) {
+      result += char
+      continue
+    }
+    if (/[\s()-]/.test(char) && result.length > 0) {
+      result += char
+      continue
+    }
+    if (/\d/.test(char) && digits < MAX_PHONE_DIGITS) {
+      result += char
+      digits += 1
+    }
+  }
+  return result
 }
 
-export function isValidNationalNumber(countryId: CountryId, national: string) {
-  const digits = digitsOnly(national)
-  const country = countryById(countryId)
-  if (digits.length < country.nationalMin || digits.length > country.nationalMax) return false
-  if (countryId === 'SA') return /^5\d{8}$/.test(digits)
-  return true
+export function isValidInternationalPhone(value: string) {
+  const compact = value.replace(/[\s()-]/g, '')
+  return /^\+\d{8,15}$/.test(compact)
 }
