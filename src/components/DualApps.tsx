@@ -1,4 +1,5 @@
 import { useApp } from '../context'
+import { withBase } from '../lib/paths'
 import { Icon } from './Icon'
 
 export function DualApps() {
@@ -56,10 +57,10 @@ export function DualApps() {
           <div className="pt-8">
             <a
               className="w-full inline-flex items-center justify-center gap-2 py-3.5 rounded-full font-label-lg text-charcoal-pure font-bold bg-gradient-to-r from-salmon-400 to-salmon-500 hover:from-salmon-300 hover:to-salmon-400 transition-all shadow-[0_6px_20px_rgba(242,116,104,0.35)]"
-              href="#pre-order"
+              href={withBase('/for-business')}
             >
               <span>{t.dual.bizCta}</span>
-              <Icon name="arrow_forward" className="text-[18px] rtl:rotate-180" />
+              <Icon name="download" className="text-[18px]" />
             </a>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import logo from '../assets/dibrah-logo.jpg'
 import { useApp } from '../context'
-import { isHomePath, withBase } from '../lib/paths'
+import { appPath, isHomePath, withBase } from '../lib/paths'
 import { Icon } from './Icon'
 
 const NAV_LINKS = [
@@ -92,6 +92,7 @@ export function Header() {
 
   const closeMenu = () => setMenuOpen(false)
   const onHome = typeof window === 'undefined' ? true : isHomePath()
+  const onBusiness = typeof window === 'undefined' ? false : appPath() === '/for-business'
   const sectionHref = (href: string) => (onHome ? href : withBase(`/${href}`))
 
   const selectLink = (href: string) => {
@@ -100,6 +101,11 @@ export function Header() {
     setActiveHref(href)
     closeMenu()
   }
+
+  const startHref = withBase('/for-business')
+  const startButtonClass = onBusiness
+    ? 'bg-salmon-500 text-charcoal-pure shadow-sm'
+    : 'font-label-md text-charcoal-pure font-bold bg-gradient-to-r from-salmon-400 via-primary-container to-salmon-500 hover:from-salmon-300 hover:to-salmon-400 shadow-[0_4px_18px_rgba(242,116,104,0.45)] hover:shadow-[0_6px_24px_rgba(242,116,104,0.6)] hover:-translate-y-0.5 active:translate-y-0'
 
   return (
     <header className="fixed top-0 left-0 right-0 w-full z-50 bg-white/90 dark:bg-[#0E1420]/90 backdrop-blur-xl border-b border-salmon-500/20 dark:border-salmon-400/15 shadow-[0_2px_16px_rgba(242,116,104,0.06)]">
@@ -133,8 +139,8 @@ export function Header() {
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
-              aria-current={activeHref === link.href ? 'true' : undefined}
-              className={navLinkClass(activeHref === link.href)}
+              aria-current={!onBusiness && activeHref === link.href ? 'true' : undefined}
+              className={navLinkClass(!onBusiness && activeHref === link.href)}
               href={sectionHref(link.href)}
               onClick={() => selectLink(link.href)}
             >
@@ -167,11 +173,17 @@ export function Header() {
           </button>
 
           <a
-            className="hidden sm:inline-flex items-center gap-2 px-4 lg:px-5 py-2.5 rounded-full font-label-md text-charcoal-pure font-bold bg-gradient-to-r from-salmon-400 via-primary-container to-salmon-500 hover:from-salmon-300 hover:to-salmon-400 shadow-[0_4px_18px_rgba(242,116,104,0.45)] hover:shadow-[0_6px_24px_rgba(242,116,104,0.6)] transition-all transform hover:-translate-y-0.5 active:translate-y-0"
-            href={sectionHref('#pre-order')}
-            onClick={() => selectLink('#pre-order')}
+            className={`hidden sm:inline-flex items-center gap-2 px-4 lg:px-5 py-2.5 rounded-full font-bold transition-all ${startButtonClass}`}
+            href={startHref}
+            aria-current={onBusiness ? 'true' : undefined}
+            onClick={() => {
+              clearSettleTimer()
+              lockedHref.current = null
+              setActiveHref('')
+              closeMenu()
+            }}
           >
-            <span className="whitespace-nowrap">{t.nav.cta}</span>
+            <span className="whitespace-nowrap">{t.nav.start}</span>
             <Icon name="arrow_forward" className="text-[18px] rtl:rotate-180" />
           </a>
 
@@ -197,8 +209,8 @@ export function Header() {
             {NAV_LINKS.map((link) => (
               <a
                 key={link.href}
-                aria-current={activeHref === link.href ? 'true' : undefined}
-                className={mobileNavLinkClass(activeHref === link.href)}
+                aria-current={!onBusiness && activeHref === link.href ? 'true' : undefined}
+                className={mobileNavLinkClass(!onBusiness && activeHref === link.href)}
                 href={sectionHref(link.href)}
                 onClick={() => selectLink(link.href)}
               >
@@ -207,10 +219,16 @@ export function Header() {
             ))}
             <a
               className="mt-2 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full font-label-md text-charcoal-pure font-bold bg-gradient-to-r from-salmon-400 via-primary-container to-salmon-500"
-              href={sectionHref('#pre-order')}
-              onClick={() => selectLink('#pre-order')}
+              href={startHref}
+              aria-current={onBusiness ? 'true' : undefined}
+              onClick={() => {
+                clearSettleTimer()
+                lockedHref.current = null
+                setActiveHref('')
+                closeMenu()
+              }}
             >
-              <span>{t.nav.cta}</span>
+              <span>{t.nav.start}</span>
               <Icon name="arrow_forward" className="text-[18px] rtl:rotate-180" />
             </a>
           </nav>

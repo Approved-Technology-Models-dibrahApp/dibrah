@@ -13,7 +13,7 @@ import {
 import { GOOGLE_FORM_OPTIONS, submitGoogleForm } from '../lib/googleForm'
 import { Icon } from './Icon'
 
-type Persona = 'merchant' | 'customer'
+type Persona = 'merchant' | 'customer' | 'opportunity'
 type FieldErrors = Partial<Record<'name' | 'email' | 'phone' | 'country' | 'gender' | 'details', string>>
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -172,45 +172,50 @@ export function PreOrder() {
                 </div>
               ) : (
                 <>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 p-1.5 rounded-2xl bg-slate-100/80 dark:bg-dark-card-soft" role="tablist">
-                    <button
-                      className={`flex flex-col items-start gap-1 p-4 rounded-xl text-start transition-all ${
-                        persona === 'merchant'
-                          ? 'bg-white dark:bg-dark-card border border-salmon-400/70 shadow-[0_6px_20px_rgba(242,116,104,0.16)]'
-                          : 'border border-transparent hover:bg-white/70 dark:hover:bg-dark-card'
-                      }`}
-                      type="button"
-                      role="tab"
-                      aria-selected={persona === 'merchant'}
-                      onClick={() => setPersona('merchant')}
-                    >
-                      <span className="flex items-center gap-2 text-charcoal-pure dark:text-white">
-                        <Icon name="store" className="text-salmon-500 text-[22px]" />
-                        <span className="font-bold text-sm sm:text-base">{t.preorder.personaMerchantTitle}</span>
-                      </span>
-                      <span className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 ps-8">
-                        {t.preorder.personaMerchantHint}
-                      </span>
-                    </button>
-                    <button
-                      className={`flex flex-col items-start gap-1 p-4 rounded-xl text-start transition-all ${
-                        persona === 'customer'
-                          ? 'bg-white dark:bg-dark-card border border-salmon-400/70 shadow-[0_6px_20px_rgba(242,116,104,0.16)]'
-                          : 'border border-transparent hover:bg-white/70 dark:hover:bg-dark-card'
-                      }`}
-                      type="button"
-                      role="tab"
-                      aria-selected={persona === 'customer'}
-                      onClick={() => setPersona('customer')}
-                    >
-                      <span className="flex items-center gap-2 text-charcoal-pure dark:text-white">
-                        <Icon name="shopping_bag" className="text-salmon-500 text-[22px]" />
-                        <span className="font-bold text-sm sm:text-base">{t.preorder.personaCustomerTitle}</span>
-                      </span>
-                      <span className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 ps-8">
-                        {t.preorder.personaCustomerHint}
-                      </span>
-                    </button>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 p-1.5 rounded-2xl bg-slate-100/80 dark:bg-dark-card-soft" role="tablist">
+                    {(
+                      [
+                        {
+                          id: 'merchant' as const,
+                          icon: 'store',
+                          title: t.preorder.personaMerchantTitle,
+                          hint: t.preorder.personaMerchantHint,
+                        },
+                        {
+                          id: 'customer' as const,
+                          icon: 'shopping_bag',
+                          title: t.preorder.personaCustomerTitle,
+                          hint: t.preorder.personaCustomerHint,
+                        },
+                        {
+                          id: 'opportunity' as const,
+                          icon: 'handshake',
+                          title: t.preorder.personaOpportunityTitle,
+                          hint: t.preorder.personaOpportunityHint,
+                        },
+                      ] as const
+                    ).map((item) => (
+                      <button
+                        key={item.id}
+                        className={`flex flex-col items-start gap-1 p-3 sm:p-4 rounded-xl text-start transition-all ${
+                          persona === item.id
+                            ? 'bg-white dark:bg-dark-card border border-salmon-400/70 shadow-[0_6px_20px_rgba(242,116,104,0.16)]'
+                            : 'border border-transparent hover:bg-white/70 dark:hover:bg-dark-card'
+                        }`}
+                        type="button"
+                        role="tab"
+                        aria-selected={persona === item.id}
+                        onClick={() => setPersona(item.id)}
+                      >
+                        <span className="flex items-center gap-2 text-charcoal-pure dark:text-white">
+                          <Icon name={item.icon} className="text-salmon-500 text-[22px] shrink-0" />
+                          <span className="font-bold text-sm sm:text-[15px] leading-snug">{item.title}</span>
+                        </span>
+                        <span className="text-xs text-slate-500 dark:text-slate-400 ps-8 leading-snug">
+                          {item.hint}
+                        </span>
+                      </button>
+                    ))}
                   </div>
 
                   <form className="flex flex-col gap-5" onSubmit={onSubmit} noValidate>

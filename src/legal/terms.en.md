@@ -258,6 +258,7 @@ The platform may remove or suspend any product or service whenever a violation o
 2. The platform may issue electronic invoices or payment notices according to the nature of the service or operation.
 3. Electronic records issued by the platform are considered means of evidence that can be relied upon according to applicable regulations, without being absolute proof if proven otherwise via recognized legal means.
 4. The user or merchant is required to review invoices and records and report any errors within the period stipulated by relevant regulations or policies.
+5. The Merchant acknowledges the accuracy of the data entered above and confirms being authorized to submit it on behalf of this business. Hereby, the Merchant appoints the 'dibrah' platform to issue and deliver electronic invoices to customers on their behalf regarding sales executed through the platform, provided that the Merchant remains fully responsible for the accuracy of the invoice data, the tax obligations related to the supply, and any liability arising therefrom.
 
 ## Chapter Five: Refunds and Financial Disputes
 
@@ -772,6 +773,7 @@ The platform may take all necessary measures to protect its systems, including: 
 2. A notice takes effect from the date sent to registered contact info, unless proven otherwise or law dictates otherwise.
 3. User commits to updating contact information; platform bears no liability for unreceived notices due to inaccurate/outdated information.
 4. Marketing/promotional messages are subject to legal consent and opt-out options.
+5. Users of this platform, of any kind, hereby authorize dibrah to send text messages, push notifications, emails, and other communication channels for platform-related purposes.
 
 ### Article (82): Assignment and Transfer of Rights
 
