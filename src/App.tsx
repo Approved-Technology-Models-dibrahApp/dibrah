@@ -79,10 +79,10 @@ function usePath() {
       const anchor = target.closest('a')
       if (!anchor || anchor.target === '_blank' || anchor.hasAttribute('download')) return
       const href = anchor.getAttribute('href')
-      if (!href || href.startsWith('mailto:') || href.startsWith('http')) return
+      if (!href || href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('http')) return
       let url: URL
       try {
-        url = new URL(href, window.location.origin)
+        url = new URL(href, window.location.href)
       } catch {
         return
       }
