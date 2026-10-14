@@ -18,6 +18,14 @@ type FieldErrors = Partial<Record<'name' | 'email' | 'phone' | 'country' | 'gend
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
+function RequiredMark() {
+  return (
+    <span className="ms-0.5 text-coral-alert" aria-hidden="true">
+      *
+    </span>
+  )
+}
+
 export function PreOrder() {
   const { t, lang } = useApp()
   const detectedCountry = useMemo(() => detectCountryId(), [])
@@ -44,13 +52,18 @@ export function PreOrder() {
       next.phone = t.preorder.errorPhone.replace('{example}', examplePhone)
     }
     if (!gender) next.gender = t.preorder.errorGender
-    if (details.trim().length < 10) next.details = t.preorder.errorDetails
+    if (!details.trim()) next.details = t.preorder.errorDetails
     return next
+  }
+
+  const clearFieldError = (field: keyof FieldErrors) => {
+    setFieldErrors((current) => ({ ...current, [field]: undefined }))
+    setError('')
   }
 
   const onCountryChange = (nextId: CountryId) => {
     setCountryId(nextId)
-    setFieldErrors((current) => ({ ...current, country: undefined }))
+    clearFieldError('country')
   }
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -204,6 +217,7 @@ export function PreOrder() {
                     <div className="flex flex-col gap-2">
                       <label className={labelClass} htmlFor="entity-name">
                         {persona === 'customer' ? t.preorder.nameLabelCustomer : t.preorder.nameLabelMerchant}
+                        <RequiredMark />
                       </label>
                       <input
                         className={`${fieldClass} ${fieldErrors.name ? invalidClass : ''}`}
@@ -221,7 +235,7 @@ export function PreOrder() {
                         aria-invalid={Boolean(fieldErrors.name)}
                         onChange={(event) => {
                           setName(event.target.value)
-                          setFieldErrors((current) => ({ ...current, name: undefined }))
+                          clearFieldError('name')
                         }}
                       />
                       {fieldErrors.name ? <p className={errorClass}>{fieldErrors.name}</p> : null}
@@ -230,6 +244,7 @@ export function PreOrder() {
                       <div className="flex flex-col gap-2">
                         <label className={labelClass} htmlFor="contact-email">
                           {t.preorder.emailLabel}
+                          <RequiredMark />
                         </label>
                         <input
                           className={`${fieldClass} ${fieldErrors.email ? invalidClass : ''}`}
@@ -243,7 +258,7 @@ export function PreOrder() {
                           aria-invalid={Boolean(fieldErrors.email)}
                           onChange={(event) => {
                             setEmail(event.target.value)
-                            setFieldErrors((current) => ({ ...current, email: undefined }))
+                            clearFieldError('email')
                           }}
                         />
                         {fieldErrors.email ? <p className={errorClass}>{fieldErrors.email}</p> : null}
@@ -251,6 +266,7 @@ export function PreOrder() {
                       <div className="flex flex-col gap-2">
                         <label className={labelClass} htmlFor="country-select">
                           {t.preorder.countryLabel}
+                          <RequiredMark />
                         </label>
                         <select
                           className={`${fieldClass} country-select pe-11 ${fieldErrors.country ? invalidClass : ''}`}
@@ -275,6 +291,7 @@ export function PreOrder() {
                       <div className="flex flex-col gap-2">
                         <label className={labelClass} htmlFor="contact-phone">
                           {t.preorder.phoneLabel}
+                          <RequiredMark />
                         </label>
                         <input
                           className={`${fieldClass} ${fieldErrors.phone ? invalidClass : ''}`}
@@ -289,13 +306,16 @@ export function PreOrder() {
                           aria-invalid={Boolean(fieldErrors.phone)}
                           onChange={(event) => {
                             setPhone(limitPhoneInput(event.target.value))
-                            setFieldErrors((current) => ({ ...current, phone: undefined }))
+                            clearFieldError('phone')
                           }}
                         />
                         {fieldErrors.phone ? <p className={errorClass}>{fieldErrors.phone}</p> : null}
                       </div>
                       <div className="flex flex-col gap-2">
-                        <span className={labelClass}>{t.preorder.genderLabel}</span>
+                        <span className={labelClass}>
+                          {t.preorder.genderLabel}
+                          <RequiredMark />
+                        </span>
                         <div className="grid grid-cols-2 gap-2">
                           <button
                             className={`px-3 py-3.5 rounded-2xl border text-sm font-semibold transition-colors ${
@@ -307,7 +327,7 @@ export function PreOrder() {
                             type="button"
                             onClick={() => {
                               setGender(GOOGLE_FORM_OPTIONS.genderMale)
-                              setFieldErrors((current) => ({ ...current, gender: undefined }))
+                              clearFieldError('gender')
                             }}
                           >
                             {t.preorder.genderMale}
@@ -322,7 +342,7 @@ export function PreOrder() {
                             type="button"
                             onClick={() => {
                               setGender(GOOGLE_FORM_OPTIONS.genderFemale)
-                              setFieldErrors((current) => ({ ...current, gender: undefined }))
+                              clearFieldError('gender')
                             }}
                           >
                             {t.preorder.genderFemale}
@@ -334,6 +354,7 @@ export function PreOrder() {
                     <div className="flex flex-col gap-2">
                       <label className={labelClass} htmlFor="request-details">
                         {t.preorder.detailsLabel}
+                        <RequiredMark />
                       </label>
                       <textarea
                         className={`${fieldClass} min-h-28 resize-y ${fieldErrors.details ? invalidClass : ''}`}
@@ -347,7 +368,7 @@ export function PreOrder() {
                         aria-invalid={Boolean(fieldErrors.details)}
                         onChange={(event) => {
                           setDetails(event.target.value)
-                          setFieldErrors((current) => ({ ...current, details: undefined }))
+                          clearFieldError('details')
                         }}
                       />
                       {fieldErrors.details ? <p className={errorClass}>{fieldErrors.details}</p> : null}

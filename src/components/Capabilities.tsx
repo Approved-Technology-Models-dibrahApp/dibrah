@@ -5,9 +5,9 @@ import { Icon } from './Icon'
 type TabId = 'merchants' | 'customers' | 'suppliers'
 
 const TAB_ACTIVE =
-  'audience-tab px-5 py-2 rounded-full font-label-md text-xs sm:text-sm bg-gradient-to-r from-salmon-400 to-salmon-500 text-charcoal-pure font-bold transition-all shadow-sm whitespace-nowrap'
+  'px-5 py-2 rounded-full font-label-md text-xs sm:text-sm bg-gradient-to-r from-salmon-400 to-salmon-500 text-charcoal-pure font-bold transition-all shadow-sm whitespace-nowrap'
 const TAB_IDLE =
-  'audience-tab px-5 py-2 rounded-full font-label-md text-xs sm:text-sm text-slate-600 dark:text-slate-400 hover:text-charcoal-pure dark:hover:text-white transition-all font-semibold whitespace-nowrap'
+  'px-5 py-2 rounded-full font-label-md text-xs sm:text-sm text-slate-600 dark:text-slate-400 hover:text-charcoal-pure dark:hover:text-white transition-all font-semibold whitespace-nowrap'
 
 export function Capabilities() {
   const { t } = useApp()

@@ -1,6 +1,6 @@
 # Dibrah Landing Page — Technical Roadmap
 
-This is a **local-only** landing page. Do not deploy it, change DNS, or publish it to Squarespace / Google Workspace.
+Pushes to `main` are deployed to GitHub Pages by `.github/workflows/deploy.yml` (see `README.md`). Do not change DNS or publish the site to Squarespace / Google Workspace from this folder.
 
 ## What this project is
 
@@ -52,7 +52,11 @@ Dibrah_Web/
     ├── index.css              Brand colors, fonts, page width
     ├── assets/                Logo and lifestyle photo
     ├── i18n/content.ts        ALL visible text (EN + AR)
+    ├── legal/                 Terms and privacy Markdown (EN + AR)
     ├── lib/googleForm.ts      Google Form field IDs and submit
+    ├── lib/countries.ts       Country list and phone validation
+    ├── lib/paths.ts           /dibrah/ base-path helpers
+    ├── lib/scroll.ts          Scroll-to-top helper for page changes
     └── components/
         ├── Header.tsx
         ├── Hero.tsx
@@ -62,6 +66,7 @@ Dibrah_Web/
         ├── Capabilities.tsx
         ├── TrustedNetwork.tsx
         ├── PreOrder.tsx
+        ├── LegalPage.tsx
         ├── Footer.tsx
         └── Icon.tsx
 ```
@@ -82,7 +87,6 @@ Company constants at the top of the same file:
 - `COMPANY_EN` / `COMPANY_AR`
 - `COMPANY_ADDRESS`
 - `COMMERCIAL_REGISTRY`
-- `GOOGLE_FORM_URL` (fallback link only)
 
 ### 2. Colors
 
@@ -98,8 +102,8 @@ Current brand palette from the attached swatch:
 
 Useful tokens:
 
-- `--color-brand-primary` / `--color-salmon-500` = salmon
-- `--color-brand-secondary` / `--color-brand-yellow` = yellow
+- `--color-salmon-500` / `--color-primary-container` = salmon
+- `--color-brand-yellow` = yellow
 - `--color-salmon-50` … `--color-salmon-950` = lighter/darker salmon
 
 Component classes use names like `bg-salmon-500`, `text-salmon-600`, `border-salmon-400`. After changing a token in `src/index.css`, refresh the local page.
@@ -111,7 +115,7 @@ Edit `src/App.tsx`. Each section is one component. Reorder the JSX to move block
 ### 4. Images
 
 - Logo: `src/assets/dibrah-logo.jpg`
-- Lifestyle banner: `src/assets/dibrah-lifestyle.jpg`
+- Lifestyle banner: `src/assets/lifestyle-retail.jpg`
 - Favicon: `public/favicon.jpg`
 
 Replace the file (same name) or update the `import` path in the component.
