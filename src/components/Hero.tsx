@@ -1,6 +1,5 @@
 import logo from '../assets/dibrah-logo.jpg'
 import { useApp } from '../context'
-import { withBase } from '../lib/paths'
 import { Icon } from './Icon'
 
 export function Hero() {
@@ -38,7 +37,7 @@ export function Hero() {
           <div className="flex flex-wrap items-center gap-4 pt-2">
             <a
               className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-7 py-3.5 rounded-full font-label-lg text-charcoal-pure font-bold bg-gradient-to-r from-salmon-400 via-primary-container to-salmon-500 hover:from-salmon-300 hover:to-salmon-400 transition-all shadow-[0_8px_24px_rgba(242,116,104,0.42)] hover:-translate-y-0.5 active:translate-y-0"
-              href={withBase('/for-business')}
+              href="#for-businesses"
             >
               <span>{t.hero.ctaPrimary}</span>
               <Icon name="download" className="text-[20px] font-bold" />
