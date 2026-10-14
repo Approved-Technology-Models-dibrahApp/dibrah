@@ -13,15 +13,15 @@ export function Experience() {
           className="w-full h-[380px] sm:h-[460px] object-cover object-center group-hover:scale-[1.02] transition-transform duration-700"
           src={lifestyle}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-charcoal-pure/95 via-charcoal-pure/50 to-transparent flex flex-col justify-end p-8 sm:p-12">
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/35 flex flex-col justify-end p-8 sm:p-12">
           <div className="inline-flex items-center gap-2 self-start px-4 py-1.5 rounded-full bg-salmon-500 text-charcoal-pure font-bold text-xs shadow-lg uppercase tracking-wider mb-3">
             <Icon name="verified" className="text-[16px] font-bold" />
             <span>{t.experience.badge}</span>
           </div>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl text-white font-extrabold tracking-tight max-w-2xl leading-tight font-headline-lg">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl text-white font-extrabold tracking-tight max-w-2xl leading-tight font-headline-lg drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
             {t.experience.title}
           </h2>
-          <p className="text-slate-200 text-sm sm:text-base max-w-2xl mt-2 leading-relaxed">
+          <p className="text-white text-sm sm:text-base max-w-2xl mt-2 leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.75)]">
             {t.experience.body}
           </p>
           <div className="flex flex-wrap items-center gap-6 pt-5 mt-2 border-t border-white/20">

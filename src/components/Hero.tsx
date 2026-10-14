@@ -1,5 +1,6 @@
 import logo from '../assets/dibrah-logo.jpg'
 import { useApp } from '../context'
+import { withBase } from '../lib/paths'
 import { Icon } from './Icon'
 
 export function Hero() {
@@ -10,7 +11,7 @@ export function Hero() {
       <div className="absolute -top-10 left-1/4 w-[480px] h-[480px] bg-gradient-to-br from-salmon-400/25 via-salmon-500/15 to-transparent rounded-full blur-3xl -z-10 animate-pulse pointer-events-none" />
       <div className="absolute top-96 -right-10 w-[420px] h-[420px] bg-salmon-400/20 dark:bg-salmon-500/15 rounded-full blur-3xl -z-10 pointer-events-none" />
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
         <div className="lg:col-span-7 flex flex-col gap-6">
           <div className="inline-flex flex-wrap items-center gap-2.5 self-start max-w-full px-4 py-1.5 rounded-full bg-white dark:bg-dark-card border border-salmon-500/30 dark:border-salmon-400/30 shadow-[0_2px_12px_rgba(242,116,104,0.15)]">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-success animate-pulse" />
@@ -37,10 +38,10 @@ export function Hero() {
           <div className="flex flex-wrap items-center gap-4 pt-2">
             <a
               className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-7 py-3.5 rounded-full font-label-lg text-charcoal-pure font-bold bg-gradient-to-r from-salmon-400 via-primary-container to-salmon-500 hover:from-salmon-300 hover:to-salmon-400 transition-all shadow-[0_8px_24px_rgba(242,116,104,0.42)] hover:-translate-y-0.5 active:translate-y-0"
-              href="#pre-order"
+              href={withBase('/for-business')}
             >
               <span>{t.hero.ctaPrimary}</span>
-              <Icon name="arrow_forward" className="text-[20px] font-bold rtl:rotate-180" />
+              <Icon name="download" className="text-[20px] font-bold" />
             </a>
             <a
               className="inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-6 py-3.5 rounded-full font-label-lg text-slate-900 dark:text-slate-100 bg-white dark:bg-dark-card hover:bg-slate-50 dark:hover:bg-dark-card-soft border border-salmon-500/40 dark:border-salmon-400/30 transition-all shadow-md hover:-translate-y-0.5"
@@ -51,31 +52,29 @@ export function Hero() {
             </a>
           </div>
 
-          <div className="pt-4 grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-            {[
-              { icon: 'loyalty', title: t.hero.proofLoyalty, sub: t.hero.proofLoyaltySub },
-              { icon: 'storefront', title: t.hero.proofB2b, sub: t.hero.proofB2bSub },
-              { icon: 'percent', title: t.hero.proofDiscounts, sub: t.hero.proofDiscountsSub },
-            ].map((item) => (
+          <div className="pt-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-2.5">
+            {t.hero.proofs.map((item) => (
               <div
                 key={item.title}
-                className="flex items-center gap-3 p-3.5 rounded-2xl bg-white dark:bg-dark-card border border-salmon-500/25 dark:border-salmon-500/20 shadow-sm hover:border-salmon-400 transition-colors"
+                className="flex items-start gap-3 p-3 rounded-2xl bg-white dark:bg-dark-card border border-salmon-500/25 dark:border-salmon-500/20 shadow-sm hover:border-salmon-400 transition-colors min-h-[4.75rem]"
               >
                 <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-salmon-400/20 to-salmon-500/30 flex items-center justify-center shrink-0 text-salmon-600 dark:text-salmon-400">
                   <Icon name={item.icon} className="text-[20px]" />
                 </div>
-                <div className="flex flex-col">
-                  <span className="font-label-sm text-charcoal-pure dark:text-white font-bold">
+                <div className="flex flex-col min-w-0">
+                  <span className="font-label-sm text-charcoal-pure dark:text-white font-bold leading-snug">
                     {item.title}
                   </span>
-                  <span className="text-xs text-slate-500 dark:text-slate-400">{item.sub}</span>
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400 leading-snug mt-0.5">
+                    {item.sub}
+                  </span>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="lg:col-span-5 relative">
+        <div className="lg:col-span-5 relative lg:self-end">
           <div className="absolute inset-0 bg-gradient-to-tr from-salmon-400/30 via-primary-container/20 to-transparent rounded-3xl blur-2xl -z-10" />
           <div className="relative w-full rounded-3xl bg-white dark:bg-dark-card p-6 border-2 border-salmon-400/40 dark:border-salmon-400/30 shadow-[0_16px_40px_rgba(242,116,104,0.18)]">
             <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-dark-border">

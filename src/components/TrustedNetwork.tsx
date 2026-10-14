@@ -63,7 +63,7 @@ export function TrustedNetwork() {
           <h3 className="text-xs uppercase font-extrabold tracking-wider text-slate-500 dark:text-slate-400 mb-4">
             {t.trusted.categoriesTitle}
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
             {t.trusted.categories.map((category) => (
               <div
                 key={category.title}

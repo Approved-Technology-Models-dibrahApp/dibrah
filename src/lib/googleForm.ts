@@ -16,7 +16,10 @@ export const GOOGLE_FORM_OPTIONS = {
   genderFemale: 'أنثى / Female',
   merchant: 'تاجر / Merchant',
   customer: 'زبون / Customer',
+  opportunity: 'فرصة أعمال / Business Opportunity',
 } as const
+
+export type AccountType = 'merchant' | 'customer' | 'opportunity'
 
 export type GoogleFormPayload = {
   name: string
@@ -24,8 +27,14 @@ export type GoogleFormPayload = {
   country: string
   gender: string
   phone: string
-  accountType: 'merchant' | 'customer'
+  accountType: AccountType
   details: string
+}
+
+function accountTypeValue(type: AccountType) {
+  if (type === 'customer') return GOOGLE_FORM_OPTIONS.customer
+  if (type === 'opportunity') return GOOGLE_FORM_OPTIONS.opportunity
+  return GOOGLE_FORM_OPTIONS.merchant
 }
 
 function buildParams(payload: GoogleFormPayload) {
@@ -39,10 +48,7 @@ function buildParams(payload: GoogleFormPayload) {
   if (payload.phone.trim()) {
     params.set(GOOGLE_FORM_ENTRIES.phone, payload.phone.trim())
   }
-  params.set(
-    GOOGLE_FORM_ENTRIES.accountType,
-    payload.accountType === 'customer' ? GOOGLE_FORM_OPTIONS.customer : GOOGLE_FORM_OPTIONS.merchant,
-  )
+  params.set(GOOGLE_FORM_ENTRIES.accountType, accountTypeValue(payload.accountType))
   params.set(GOOGLE_FORM_ENTRIES.details, payload.details.trim())
   params.set('fvv', '1')
   params.set('pageHistory', '0')

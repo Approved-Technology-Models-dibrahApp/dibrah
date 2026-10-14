@@ -2,6 +2,7 @@ import { useEffect, useLayoutEffect, useState } from 'react'
 import { Capabilities } from './components/Capabilities'
 import { DualApps } from './components/DualApps'
 import { Experience } from './components/Experience'
+import { BusinessPage } from './components/BusinessPage'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
@@ -106,6 +107,8 @@ function Router() {
       document.title = lang === 'ar' ? 'الشروط والأحكام | دِبــرة' : 'Terms & Conditions | dibrah'
     } else if (path === '/privacy') {
       document.title = lang === 'ar' ? 'سياسة الخصوصية | دِبــرة' : 'Privacy Policy | dibrah'
+    } else if (path === '/for-business') {
+      document.title = lang === 'ar' ? 'ابدأ مع دِبرة | دِبــرة' : 'Start with Dibrah | dibrah'
     } else {
       document.title =
         lang === 'ar'
@@ -116,6 +119,7 @@ function Router() {
 
   if (path === '/terms') return <LegalPage kind="terms" />
   if (path === '/privacy') return <LegalPage kind="privacy" />
+  if (path === '/for-business') return <BusinessPage />
   return <LandingPage />
 }
 
