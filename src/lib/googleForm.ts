@@ -1,14 +1,14 @@
 export const GOOGLE_FORM_ACTION =
-  'https://docs.google.com/forms/d/e/1FAIpQLScME0DdKzn1RoMky5LABM7gZxImvoiQh_rFanZbX4pu5hKEJQ/formResponse'
+  'https://docs.google.com/forms/d/e/1FAIpQLSdBUPBIPc1rY1It0a0qnjaOfTrYSv_eo3gu1G33xfcjVcRFBw/formResponse'
 
 export const GOOGLE_FORM_ENTRIES = {
-  name: 'entry.1425841404',
-  email: 'entry.1785221743',
-  country: 'entry.766586296',
-  gender: 'entry.33282545',
-  phone: 'entry.871156733',
-  accountType: 'entry.638895621',
-  details: 'entry.867378080',
+  name: 'entry.951612916',
+  email: 'entry.90306116',
+  country: 'entry.22344068',
+  gender: 'entry.1050870361',
+  phone: 'entry.1796801114',
+  accountType: 'entry.1348701074',
+  details: 'entry.1282665414',
 } as const
 
 export const GOOGLE_FORM_OPTIONS = {
