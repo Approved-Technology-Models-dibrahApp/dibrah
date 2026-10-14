@@ -1,50 +1,91 @@
-import { useState, type FormEvent } from 'react'
+import { useMemo, useState, type FormEvent } from 'react'
 import logo from '../assets/dibrah-logo.jpg'
 import { useApp } from '../context'
 import { CONTACT_EMAIL } from '../i18n/content'
-import { submitPreOrder } from '../lib/submitPreOrder'
+import {
+  COUNTRIES,
+  DIAL_CODES,
+  countryById,
+  detectCountryId,
+  digitsOnly,
+  formatPhone,
+  isValidNationalNumber,
+  type CountryId,
+} from '../lib/countries'
+import { GOOGLE_FORM_OPTIONS, submitGoogleForm } from '../lib/googleForm'
 import { Icon } from './Icon'
 
 type Persona = 'merchant' | 'customer'
+type FieldErrors = Partial<Record<'name' | 'email' | 'phone' | 'country' | 'gender' | 'details', string>>
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export function PreOrder() {
-  const { t } = useApp()
+  const { t, lang } = useApp()
+  const detectedCountry = useMemo(() => detectCountryId(), [])
   const [persona, setPersona] = useState<Persona>('merchant')
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [countryId, setCountryId] = useState<CountryId>(detectedCountry)
+  const [dialCode, setDialCode] = useState(countryById(detectedCountry).dial)
+  const [nationalPhone, setNationalPhone] = useState('')
   const [gender, setGender] = useState('')
+  const [details, setDetails] = useState('')
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState('')
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({})
+
+  const validate = (): FieldErrors => {
+    const next: FieldErrors = {}
+    if (name.trim().length < 2) next.name = t.preorder.errorName
+    if (!EMAIL_PATTERN.test(email.trim())) next.email = t.preorder.errorEmail
+    if (!countryId) next.country = t.preorder.errorCountry
+    if (!isValidNationalNumber(countryId, nationalPhone)) next.phone = t.preorder.errorPhone
+    if (!gender) next.gender = t.preorder.errorGender
+    if (details.trim().length < 10) next.details = t.preorder.errorDetails
+    return next
+  }
+
+  const onCountryChange = (nextId: CountryId) => {
+    setCountryId(nextId)
+    setDialCode(countryById(nextId).dial)
+    setFieldErrors((current) => ({ ...current, country: undefined, phone: undefined }))
+  }
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const form = event.currentTarget
-    if (!form.checkValidity()) {
+    const nextErrors = validate()
+    setFieldErrors(nextErrors)
+    if (Object.keys(nextErrors).length > 0) {
       setError(t.preorder.errorRequired)
       return
     }
 
-    const data = new FormData(form)
-    const name = String(data.get('name') ?? '')
-    const email = String(data.get('email') ?? '')
-    const phone = String(data.get('phone') ?? '')
-    const country = String(data.get('country') ?? '')
-    const details = String(data.get('details') ?? '')
+    const country = COUNTRIES.find((item) => item.id === countryId)
+    const countryLabel = lang === 'ar' ? country?.ar : country?.en
 
     setError('')
     setSubmitting(true)
     try {
-      await submitPreOrder({
+      await submitGoogleForm({
         name,
         email,
-        country,
+        country: countryLabel ?? countryId,
         gender,
-        phone,
+        phone: formatPhone(dialCode, nationalPhone),
         accountType: persona,
         details,
       })
       setSubmitted(true)
-      form.reset()
+      setName('')
+      setEmail('')
+      setNationalPhone('')
       setGender('')
+      setDetails('')
+      setCountryId(detectedCountry)
+      setDialCode(countryById(detectedCountry).dial)
+      setFieldErrors({})
     } catch {
       setError(t.preorder.submitFailed)
     } finally {
@@ -54,7 +95,9 @@ export function PreOrder() {
 
   const fieldClass =
     'w-full px-4 py-3.5 rounded-2xl bg-slate-50 dark:bg-dark-card-soft text-charcoal-pure dark:text-white border border-slate-200 dark:border-dark-border focus:border-salmon-500 focus:outline-none transition-colors disabled:opacity-60'
+  const invalidClass = 'border-coral-alert focus:border-coral-alert'
   const labelClass = 'text-sm text-charcoal-pure dark:text-white font-bold'
+  const errorClass = 'text-xs text-coral-alert font-medium'
 
   return (
     <section
@@ -164,7 +207,7 @@ export function PreOrder() {
                         {persona === 'customer' ? t.preorder.nameLabelCustomer : t.preorder.nameLabelMerchant}
                       </label>
                       <input
-                        className={fieldClass}
+                        className={`${fieldClass} ${fieldErrors.name ? invalidClass : ''}`}
                         disabled={submitting}
                         id="entity-name"
                         name="name"
@@ -175,7 +218,14 @@ export function PreOrder() {
                         }
                         required
                         type="text"
+                        value={name}
+                        aria-invalid={Boolean(fieldErrors.name)}
+                        onChange={(event) => {
+                          setName(event.target.value)
+                          setFieldErrors((current) => ({ ...current, name: undefined }))
+                        }}
                       />
+                      {fieldErrors.name ? <p className={errorClass}>{fieldErrors.name}</p> : null}
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       <div className="flex flex-col gap-2">
@@ -183,75 +233,121 @@ export function PreOrder() {
                           {t.preorder.emailLabel}
                         </label>
                         <input
-                          className={fieldClass}
+                          className={`${fieldClass} ${fieldErrors.email ? invalidClass : ''}`}
                           disabled={submitting}
                           id="contact-email"
                           name="email"
                           placeholder={t.preorder.emailPlaceholder}
                           required
                           type="email"
+                          value={email}
+                          aria-invalid={Boolean(fieldErrors.email)}
+                          onChange={(event) => {
+                            setEmail(event.target.value)
+                            setFieldErrors((current) => ({ ...current, email: undefined }))
+                          }}
                         />
+                        {fieldErrors.email ? <p className={errorClass}>{fieldErrors.email}</p> : null}
                       </div>
-                      <div className="flex flex-col gap-2">
-                        <label className={labelClass} htmlFor="contact-phone">
-                          {t.preorder.phoneLabel}
-                        </label>
-                        <input
-                          className={fieldClass}
-                          disabled={submitting}
-                          id="contact-phone"
-                          name="phone"
-                          placeholder={t.preorder.phonePlaceholder}
-                          type="tel"
-                        />
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       <div className="flex flex-col gap-2">
                         <label className={labelClass} htmlFor="country-select">
                           {t.preorder.countryLabel}
                         </label>
                         <select
-                          className={`${fieldClass} country-select pe-11`}
+                          className={`${fieldClass} country-select pe-11 ${fieldErrors.country ? invalidClass : ''}`}
                           disabled={submitting}
                           id="country-select"
                           name="country"
                           required
-                          defaultValue={t.preorder.countries[0]}
+                          value={countryId}
+                          aria-invalid={Boolean(fieldErrors.country)}
+                          onChange={(event) => onCountryChange(event.target.value as CountryId)}
                         >
-                          {t.preorder.countries.map((country) => (
-                            <option key={country}>{country}</option>
+                          {COUNTRIES.map((country) => (
+                            <option key={country.id} value={country.id}>
+                              {lang === 'ar' ? country.ar : country.en}
+                            </option>
                           ))}
                         </select>
+                        {fieldErrors.country ? <p className={errorClass}>{fieldErrors.country}</p> : null}
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                      <div className="flex flex-col gap-2">
+                        <label className={labelClass} htmlFor="contact-phone">
+                          {t.preorder.phoneLabel}
+                        </label>
+                        <div className="flex gap-2">
+                          <select
+                            aria-label={t.preorder.dialLabel}
+                            className={`${fieldClass} dial-select w-[7.25rem] shrink-0 px-3 ${fieldErrors.phone ? invalidClass : ''}`}
+                            disabled={submitting}
+                            value={dialCode}
+                            onChange={(event) => {
+                              setDialCode(event.target.value)
+                              setFieldErrors((current) => ({ ...current, phone: undefined }))
+                            }}
+                          >
+                            {DIAL_CODES.map((code) => (
+                              <option key={code} value={code}>
+                                {code}
+                              </option>
+                            ))}
+                          </select>
+                          <input
+                            className={`${fieldClass} ${fieldErrors.phone ? invalidClass : ''}`}
+                            disabled={submitting}
+                            id="contact-phone"
+                            name="phone"
+                            inputMode="numeric"
+                            placeholder={t.preorder.phonePlaceholder}
+                            required
+                            type="tel"
+                            value={nationalPhone}
+                            aria-invalid={Boolean(fieldErrors.phone)}
+                            onChange={(event) => {
+                              setNationalPhone(digitsOnly(event.target.value))
+                              setFieldErrors((current) => ({ ...current, phone: undefined }))
+                            }}
+                          />
+                        </div>
+                        {fieldErrors.phone ? <p className={errorClass}>{fieldErrors.phone}</p> : null}
                       </div>
                       <div className="flex flex-col gap-2">
                         <span className={labelClass}>{t.preorder.genderLabel}</span>
                         <div className="grid grid-cols-2 gap-2">
                           <button
                             className={`px-3 py-3.5 rounded-2xl border text-sm font-semibold transition-colors ${
-                              gender === 'Male'
+                              gender === GOOGLE_FORM_OPTIONS.genderMale
                                 ? 'border-salmon-400 bg-salmon-50 dark:bg-salmon-950/30 text-charcoal-pure dark:text-white'
-                                : 'border-slate-200 dark:border-dark-border bg-slate-50 dark:bg-dark-card-soft text-slate-600 dark:text-slate-300'
+                                : `border-slate-200 dark:border-dark-border bg-slate-50 dark:bg-dark-card-soft text-slate-600 dark:text-slate-300 ${fieldErrors.gender ? 'border-coral-alert' : ''}`
                             }`}
                             disabled={submitting}
                             type="button"
-                            onClick={() => setGender('Male')}
+                            onClick={() => {
+                              setGender(GOOGLE_FORM_OPTIONS.genderMale)
+                              setFieldErrors((current) => ({ ...current, gender: undefined }))
+                            }}
                           >
                             {t.preorder.genderMale}
                           </button>
                           <button
                             className={`px-3 py-3.5 rounded-2xl border text-sm font-semibold transition-colors ${
-                              gender === 'Female'
+                              gender === GOOGLE_FORM_OPTIONS.genderFemale
                                 ? 'border-salmon-400 bg-salmon-50 dark:bg-salmon-950/30 text-charcoal-pure dark:text-white'
-                                : 'border-slate-200 dark:border-dark-border bg-slate-50 dark:bg-dark-card-soft text-slate-600 dark:text-slate-300'
+                                : `border-slate-200 dark:border-dark-border bg-slate-50 dark:bg-dark-card-soft text-slate-600 dark:text-slate-300 ${fieldErrors.gender ? 'border-coral-alert' : ''}`
                             }`}
                             disabled={submitting}
                             type="button"
-                            onClick={() => setGender('Female')}
+                            onClick={() => {
+                              setGender(GOOGLE_FORM_OPTIONS.genderFemale)
+                              setFieldErrors((current) => ({ ...current, gender: undefined }))
+                            }}
                           >
                             {t.preorder.genderFemale}
                           </button>
                         </div>
+                        {fieldErrors.gender ? <p className={errorClass}>{fieldErrors.gender}</p> : null}
                       </div>
                     </div>
                     <div className="flex flex-col gap-2">
@@ -259,14 +355,21 @@ export function PreOrder() {
                         {t.preorder.detailsLabel}
                       </label>
                       <textarea
-                        className={`${fieldClass} min-h-28 resize-y`}
+                        className={`${fieldClass} min-h-28 resize-y ${fieldErrors.details ? invalidClass : ''}`}
                         disabled={submitting}
                         id="request-details"
                         name="details"
                         placeholder={t.preorder.detailsPlaceholder}
                         required
                         rows={4}
+                        value={details}
+                        aria-invalid={Boolean(fieldErrors.details)}
+                        onChange={(event) => {
+                          setDetails(event.target.value)
+                          setFieldErrors((current) => ({ ...current, details: undefined }))
+                        }}
                       />
+                      {fieldErrors.details ? <p className={errorClass}>{fieldErrors.details}</p> : null}
                     </div>
                     {error ? (
                       <p className="text-sm text-coral-alert font-medium" role="alert">
