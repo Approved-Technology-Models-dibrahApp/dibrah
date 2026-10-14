@@ -11,6 +11,7 @@ import { TrustedNetwork } from './components/TrustedNetwork'
 import { WhyDibrah } from './components/WhyDibrah'
 import { AppProvider, useApp } from './context'
 import { appPath } from './lib/paths'
+import { jumpToTop } from './lib/scroll'
 
 function LandingPage() {
   const { t } = useApp()
@@ -49,26 +50,11 @@ function LandingPage() {
   )
 }
 
-function normalizePath(pathname: string) {
-  return appPath(pathname)
-}
-
-function jumpToTop() {
-  const root = document.documentElement
-  root.classList.remove('scroll-smooth')
-  window.scrollTo(0, 0)
-  root.scrollTop = 0
-  document.body.scrollTop = 0
-  requestAnimationFrame(() => {
-    root.classList.add('scroll-smooth')
-  })
-}
-
 function usePath() {
-  const [path, setPath] = useState(() => normalizePath(window.location.pathname))
+  const [path, setPath] = useState(() => appPath(window.location.pathname))
 
   useEffect(() => {
-    const sync = () => setPath(normalizePath(window.location.pathname))
+    const sync = () => setPath(appPath(window.location.pathname))
     window.addEventListener('popstate', sync)
 
     const onClick = (event: MouseEvent) => {
@@ -93,7 +79,7 @@ function usePath() {
       if (next !== current) {
         window.history.pushState({}, '', next)
       }
-      setPath(normalizePath(url.pathname))
+      setPath(appPath(url.pathname))
       if (url.hash) {
         window.setTimeout(() => {
           document.getElementById(url.hash.slice(1))?.scrollIntoView()

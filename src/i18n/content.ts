@@ -11,7 +11,6 @@ export const copy = {
   en: {
     skip: 'Skip to content',
     brand: 'dibrah',
-    brandAr: 'dibrah',
     nav: {
       why: 'Why dibrah',
       apps: 'Mobile Apps',
@@ -278,16 +277,12 @@ export const copy = {
     },
     preorder: {
       kicker: 'Early Access Registration',
-      title: 'Pre-order Interest Form',
       titlePrimary: 'Pre-order Interest Form',
       titleSecondary: '',
-      subtitle: 'Empowering SMEs & Enriching Customer Experience',
       subtitlePrimary: 'Empowering SMEs & Enriching Customer Experience',
       subtitleSecondary: '',
-      personaMerchant: 'Business Owners & Suppliers',
       personaMerchantTitle: 'Business Owners & Suppliers',
       personaMerchantHint: 'Merchant and supplier app',
-      personaCustomer: 'Customers & Shoppers',
       personaCustomerTitle: 'Customers & Shoppers',
       personaCustomerHint: 'Customer app',
       nameLabelMerchant: 'Full Name',
@@ -297,7 +292,6 @@ export const copy = {
       emailLabel: 'Email',
       emailPlaceholder: 'contact@store.sa',
       phoneLabel: 'Phone Number',
-      phonePlaceholder: '+966 5XXXXXXX',
       countryLabel: 'Country',
       genderLabel: 'Gender',
       genderMale: 'Male',
@@ -325,9 +319,7 @@ export const copy = {
     footer: {
       blurb:
         'The high-velocity dual commerce and loyalty ecosystem engineered for Saudi SMEs, merchants, and discerning consumers.',
-      navigation: 'Navigation',
       documents: 'Official Documents',
-      preorder: 'Pre-order Interest Form',
       terms: 'Terms & Conditions',
       privacy: 'Privacy Policy',
       compliance: 'Compliance & Trust',
@@ -349,7 +341,6 @@ export const copy = {
   ar: {
     skip: 'تخطٍ إلى المحتوى',
     brand: 'دِبــرة',
-    brandAr: 'دِبــرة',
     nav: {
       why: 'لماذا دِبرة',
       apps: 'تطبيقات الجوال',
@@ -614,16 +605,12 @@ export const copy = {
     },
     preorder: {
       kicker: 'تسجيل الوصول المبكر',
-      title: 'سجل اهتمامك',
       titlePrimary: 'سجل اهتمامك',
       titleSecondary: '',
-      subtitle: 'نظام متكامل لتمكين الشركات الصغيرة والمتوسطة وإثراء تجربة العملاء',
       subtitlePrimary: 'نظام متكامل لتمكين الشركات الصغيرة والمتوسطة وإثراء تجربة العملاء',
       subtitleSecondary: '',
-      personaMerchant: 'أصحاب الأعمال والموردون',
       personaMerchantTitle: 'أصحاب الأعمال والموردون',
       personaMerchantHint: 'تطبيق التجار والموردين',
-      personaCustomer: 'العملاء والمتسوقون',
       personaCustomerTitle: 'العملاء والمتسوقون',
       personaCustomerHint: 'تطبيق الزبائن',
       nameLabelMerchant: 'الاسم الكامل',
@@ -633,7 +620,6 @@ export const copy = {
       emailLabel: 'البريد الإلكتروني',
       emailPlaceholder: 'contact@store.sa',
       phoneLabel: 'رقم الهاتف',
-      phonePlaceholder: '+966 5XXXXXXX',
       countryLabel: 'البلد',
       genderLabel: 'الجنس',
       genderMale: 'ذكر',
@@ -661,9 +647,7 @@ export const copy = {
     footer: {
       blurb:
         'نظام متكامل لتمكين الشركات الصغيرة والمتوسطة وإثراء تجربة العملاء. منظومة تجارة مزدوجة وولاء عالٍ صُممت للمنشآت والتجار والمستهلكين في السعودية.',
-      navigation: 'التنقل',
       documents: 'وثائق رسمية',
-      preorder: 'نموذج تسجيل الاهتمام',
       terms: 'الشروط والأحكام',
       privacy: 'سياسة الخصوصية',
       compliance: 'الامتثال والثقة',

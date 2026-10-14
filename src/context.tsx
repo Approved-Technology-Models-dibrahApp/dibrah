@@ -8,7 +8,6 @@ import {
   type ReactNode,
 } from 'react'
 import { copy, type Copy, type Lang } from './i18n/content'
-import { appPath } from './lib/paths'
 
 type Theme = 'light' | 'dark'
 
@@ -16,7 +15,6 @@ type AppContextValue = {
   lang: Lang
   theme: Theme
   t: Copy
-  dir: 'ltr' | 'rtl'
   toggleLang: () => void
   toggleTheme: () => void
 }
@@ -50,17 +48,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
     root.lang = lang
     root.dir = lang === 'ar' ? 'rtl' : 'ltr'
     localStorage.setItem('dibrah-lang', lang)
-    const path = appPath()
-    if (path === '/terms') {
-      document.title = lang === 'ar' ? 'الشروط والأحكام | دِبــرة' : 'Terms & Conditions | dibrah'
-    } else if (path === '/privacy') {
-      document.title = lang === 'ar' ? 'سياسة الخصوصية | دِبــرة' : 'Privacy Policy | dibrah'
-    } else {
-      document.title =
-        lang === 'ar'
-          ? 'دِبــرة - تمكين المنشآت وإثراء تجربة العملاء'
-          : 'dibrah - Empowering SMEs & Enriching Customer Experience'
-    }
   }, [lang])
 
   useEffect(() => {
@@ -82,7 +69,6 @@ export function AppProvider({ children }: { children: ReactNode }) {
       lang,
       theme,
       t: copy[lang],
-      dir: lang === 'ar' ? 'rtl' : 'ltr',
       toggleLang,
       toggleTheme,
     }),

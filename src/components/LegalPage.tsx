@@ -1,6 +1,7 @@
 import { Fragment, useLayoutEffect, useMemo, type ReactNode } from 'react'
 import { useApp } from '../context'
 import { withBase } from '../lib/paths'
+import { jumpToTop } from '../lib/scroll'
 import privacyAr from '../legal/privacy.ar.md?raw'
 import privacyEn from '../legal/privacy.en.md?raw'
 import termsAr from '../legal/terms.ar.md?raw'
@@ -114,14 +115,7 @@ export function LegalPage({ kind }: { kind: LegalKind }) {
   const body = useMemo(() => renderLegal(source), [source])
 
   useLayoutEffect(() => {
-    const root = document.documentElement
-    root.classList.remove('scroll-smooth')
-    window.scrollTo(0, 0)
-    root.scrollTop = 0
-    document.body.scrollTop = 0
-    requestAnimationFrame(() => {
-      root.classList.add('scroll-smooth')
-    })
+    jumpToTop()
   }, [kind, lang])
 
   return (

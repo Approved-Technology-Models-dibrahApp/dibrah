@@ -3,13 +3,8 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-surface-bright: #f8f9ff;
-  --color-on-secondary-container: #5c6274;
-  --color-background: #f8f9ff;
   --color-charcoal-pure: #0f172a;
-  --color-primary: #c13d32;
   --color-emerald-success: #10b981;
-  --color-border-subtle: #e2e8f0;
   --color-salmon-50: #fef2f1;
   --color-salmon-100: #fde4e1;
   --color-salmon-200: #fbc8c2;
@@ -23,32 +18,21 @@
   --color-salmon-950: #471512;
   --color-brand-yellow: #f8c63b;
   --color-primary-container: #f27468;
-  --color-primary-fixed-dim: #f48a7e;
-  --color-surface-card: #ffffff;
-  --color-surface-canvas: #fafaf9;
   --color-coral-alert: #ec5757;
-  --color-secondary: #575e70;
   --color-dark-bg: #0b0f17;
   --color-dark-card: #131a26;
   --color-dark-card-soft: #1a2332;
   --color-dark-border: #243044;
-  --color-brand-primary: #f27468;
-  --color-brand-secondary: #f8c63b;
-  --color-brand-tertiary: #0d9488;
-  --color-brand-neutral: #1f2937;
 
-  --font-headline-md: "Plus Jakarta Sans", "Noto Sans Arabic", sans-serif;
   --font-display-hero: "Plus Jakarta Sans", "Noto Sans Arabic", sans-serif;
   --font-body-sm: Inter, "Noto Sans Arabic", sans-serif;
   --font-body-md: Inter, "Noto Sans Arabic", sans-serif;
-  --font-headline-lg-mobile: "Plus Jakarta Sans", "Noto Sans Arabic", sans-serif;
   --font-body-lg: Inter, "Noto Sans Arabic", sans-serif;
   --font-label-sm: "Plus Jakarta Sans", "Noto Sans Arabic", sans-serif;
   --font-headline-sm: "Plus Jakarta Sans", "Noto Sans Arabic", sans-serif;
   --font-label-md: "Plus Jakarta Sans", "Noto Sans Arabic", sans-serif;
   --font-headline-lg: "Plus Jakarta Sans", "Noto Sans Arabic", sans-serif;
   --font-label-lg: "Plus Jakarta Sans", "Noto Sans Arabic", sans-serif;
-  --font-arabic: "Noto Sans Arabic", "Plus Jakarta Sans", sans-serif;
 }
 
 @layer base {
@@ -114,14 +98,6 @@
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
   -webkit-font-smoothing: antialiased;
   user-select: none;
-}
-
-.salmon-glow {
-  box-shadow: 0 0 40px -8px rgba(242, 116, 104, 0.45);
-}
-
-.salmon-glow-sm {
-  box-shadow: 0 4px 20px -2px rgba(242, 116, 104, 0.35);
 }
 
 #top,
