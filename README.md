@@ -93,7 +93,6 @@ There is no automated test suite.
 
 ## Architecture and application flow
 
-```mermaid
 flowchart TD
   html[index.html] -->|applies saved theme/lang before render| main[src/main.tsx]
   main --> app[App.tsx]
