@@ -1,7 +1,7 @@
 export type Lang = 'en' | 'ar'
 
-export const GOOGLE_FORM_URL = 'https://forms.gle/37nT7RTvVsNTgAg56'
 export const CONTACT_EMAIL = 'admin@dibrahapp.com'
+export const PREORDER_NOTIFY_EMAIL = 'saddarturi@gmail.com'
 export const COMPANY_EN = 'Approved Technology Models LLC'
 export const COMPANY_AR = 'شركة النماذج التقنية المعتمدة'
 export const COMPANY_ADDRESS =
@@ -285,7 +285,6 @@ export const copy = {
       subtitle: 'Empowering SMEs & Enriching Customer Experience',
       subtitlePrimary: 'Empowering SMEs & Enriching Customer Experience',
       subtitleSecondary: '',
-      googleCta: 'Register interest via the official form',
       personaMerchant: 'Business Owners & Suppliers',
       personaMerchantTitle: 'Business Owners & Suppliers',
       personaMerchantHint: 'Merchant and supplier app',
@@ -323,7 +322,7 @@ export const copy = {
       successTitle: 'Thank you!',
       successBody:
         'Your interest has been registered with Approved Technology Models LLC. Our team will contact you by WhatsApp or email.',
-      submitFailed: 'The form could not be sent. Please try again or use the official form.',
+      submitFailed: 'The form could not be sent. Please try again.',
       errorRequired: 'Please complete the required fields.',
       company: COMPANY_EN,
       address: COMPANY_ADDRESS,
@@ -335,7 +334,6 @@ export const copy = {
       navigation: 'Navigation',
       documents: 'Official Documents',
       preorder: 'Pre-order Interest Form',
-      googleForm: 'Official interest form',
       terms: 'Terms & Conditions',
       privacy: 'Privacy Policy',
       compliance: 'Compliance & Trust',
@@ -628,7 +626,6 @@ export const copy = {
       subtitle: 'نظام متكامل لتمكين الشركات الصغيرة والمتوسطة وإثراء تجربة العملاء',
       subtitlePrimary: 'نظام متكامل لتمكين الشركات الصغيرة والمتوسطة وإثراء تجربة العملاء',
       subtitleSecondary: '',
-      googleCta: 'سجل اهتمامك عبر النموذج الرسمي',
       personaMerchant: 'أصحاب الأعمال والموردون',
       personaMerchantTitle: 'أصحاب الأعمال والموردون',
       personaMerchantHint: 'تطبيق التجار والموردين',
@@ -666,7 +663,7 @@ export const copy = {
       successTitle: 'شكراً لك!',
       successBody:
         'تم تسجيل اهتمامك بنجاح لدى شركة النماذج التقنية المعتمدة. سيقوم ممثلنا بالتواصل معك عبر الواتساب أو البريد الإلكتروني.',
-      submitFailed: 'تعذر إرسال النموذج. يرجى المحاولة مرة أخرى أو استخدام النموذج الرسمي.',
+      submitFailed: 'تعذر إرسال النموذج. يرجى المحاولة مرة أخرى.',
       errorRequired: 'يرجى إكمال الحقول المطلوبة.',
       company: COMPANY_AR,
       address: 'العنوان 3668، حي القيروان، الرياض، الرمز البريدي 13532، المملكة العربية السعودية',
@@ -678,7 +675,6 @@ export const copy = {
       navigation: 'التنقل',
       documents: 'وثائق رسمية',
       preorder: 'نموذج تسجيل الاهتمام',
-      googleForm: 'نموذج تسجيل الاهتمام الرسمي',
       terms: 'الشروط والأحكام',
       privacy: 'سياسة الخصوصية',
       compliance: 'الامتثال والثقة',

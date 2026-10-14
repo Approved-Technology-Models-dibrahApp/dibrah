@@ -1,8 +1,8 @@
 import { useState, type FormEvent } from 'react'
 import logo from '../assets/dibrah-logo.jpg'
 import { useApp } from '../context'
-import { CONTACT_EMAIL, GOOGLE_FORM_URL } from '../i18n/content'
-import { GOOGLE_FORM_OPTIONS, submitGoogleForm } from '../lib/googleForm'
+import { CONTACT_EMAIL } from '../i18n/content'
+import { submitPreOrder } from '../lib/submitPreOrder'
 import { Icon } from './Icon'
 
 type Persona = 'merchant' | 'customer'
@@ -33,7 +33,7 @@ export function PreOrder() {
     setError('')
     setSubmitting(true)
     try {
-      await submitGoogleForm({
+      await submitPreOrder({
         name,
         email,
         country,
@@ -229,25 +229,25 @@ export function PreOrder() {
                         <div className="grid grid-cols-2 gap-2">
                           <button
                             className={`px-3 py-3.5 rounded-2xl border text-sm font-semibold transition-colors ${
-                              gender === GOOGLE_FORM_OPTIONS.genderMale
+                              gender === 'Male'
                                 ? 'border-salmon-400 bg-salmon-50 dark:bg-salmon-950/30 text-charcoal-pure dark:text-white'
                                 : 'border-slate-200 dark:border-dark-border bg-slate-50 dark:bg-dark-card-soft text-slate-600 dark:text-slate-300'
                             }`}
                             disabled={submitting}
                             type="button"
-                            onClick={() => setGender(GOOGLE_FORM_OPTIONS.genderMale)}
+                            onClick={() => setGender('Male')}
                           >
                             {t.preorder.genderMale}
                           </button>
                           <button
                             className={`px-3 py-3.5 rounded-2xl border text-sm font-semibold transition-colors ${
-                              gender === GOOGLE_FORM_OPTIONS.genderFemale
+                              gender === 'Female'
                                 ? 'border-salmon-400 bg-salmon-50 dark:bg-salmon-950/30 text-charcoal-pure dark:text-white'
                                 : 'border-slate-200 dark:border-dark-border bg-slate-50 dark:bg-dark-card-soft text-slate-600 dark:text-slate-300'
                             }`}
                             disabled={submitting}
                             type="button"
-                            onClick={() => setGender(GOOGLE_FORM_OPTIONS.genderFemale)}
+                            onClick={() => setGender('Female')}
                           >
                             {t.preorder.genderFemale}
                           </button>
@@ -271,14 +271,6 @@ export function PreOrder() {
                     {error ? (
                       <p className="text-sm text-coral-alert font-medium" role="alert">
                         {error}
-                        <a
-                          className="ms-1 underline font-bold"
-                          href={GOOGLE_FORM_URL}
-                          rel="noopener noreferrer"
-                          target="_blank"
-                        >
-                          {t.preorder.googleCta}
-                        </a>
                       </p>
                     ) : null}
                     <button

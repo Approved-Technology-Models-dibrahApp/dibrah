@@ -1,6 +1,6 @@
 import logo from '../assets/dibrah-logo.jpg'
 import { useApp } from '../context'
-import { CONTACT_EMAIL, GOOGLE_FORM_URL } from '../i18n/content'
+import { CONTACT_EMAIL } from '../i18n/content'
 import { withBase } from '../lib/paths'
 import { Icon } from './Icon'
 
@@ -43,14 +43,6 @@ export function Footer() {
 
           <div className="flex flex-col gap-3 text-sm">
             <span className="font-bold text-charcoal-pure dark:text-white">{t.footer.documents}</span>
-            <a
-              className="text-slate-600 dark:text-slate-400 hover:text-salmon-600 dark:hover:text-salmon-400 transition-colors"
-              href={GOOGLE_FORM_URL}
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              {t.footer.googleForm}
-            </a>
             <a className="text-slate-600 dark:text-slate-400 hover:text-salmon-600 dark:hover:text-salmon-400 transition-colors" href={withBase('/terms')}>
               {t.footer.terms}
             </a>
