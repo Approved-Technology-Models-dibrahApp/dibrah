@@ -109,12 +109,13 @@ export const copy = {
       bizTitle: "Business Owners' and Suppliers' App",
       bizQuote:
         '“We empower Small and Medium Businesses to find better suppliers, engage with their current customers, and reach new customers.”',
-      bizCta: 'Download Business App',
+      comingSoon: 'Coming soon',
+      appStore: 'App Store',
+      googlePlay: 'Google Play',
       shopBadge: 'FOR CONSUMERS & SHOPPERS',
       shopTitle: "Customers' App",
       shopQuote:
         '“Customer journey to find local businesses and offers becomes smarter with dibrah. Make every visit to any business count.”',
-      shopCta: 'Download Customer App',
       bizFeatures: [
         {
           icon: 'inventory_2',
@@ -534,12 +535,13 @@ export const copy = {
       bizTitle: 'تطبيق أصحاب الأعمال والموردين',
       bizQuote:
         '«نمكّن المنشآت الصغيرة والمتوسطة من إيجاد موردين أفضل، والتفاعل مع عملائهم الحاليين، والوصول إلى عملاء جدد.»',
-      bizCta: 'حمّل تطبيق التجار',
+      comingSoon: 'قريبًا',
+      appStore: 'App Store',
+      googlePlay: 'Google Play',
       shopBadge: 'للمستهلكين والمتسوقين',
       shopTitle: 'تطبيق العملاء',
       shopQuote:
         '«تصبح رحلة العميل لإيجاد الأعمال المحلية والعروض أذكى مع دِبرة. اجعل كل زيارة لأي منشأة ذات قيمة.»',
-      shopCta: 'حمّل تطبيق العملاء',
       bizFeatures: [
         {
           icon: 'inventory_2',
