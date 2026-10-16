@@ -1,12 +1,14 @@
 import lifestyle from '../assets/lifestyle-retail.jpg'
 import { useApp } from '../context'
 import { Icon } from './Icon'
+import { Reveal } from './Reveal'
 
 export function Experience() {
   const { t } = useApp()
 
   return (
     <section className="page-shell py-10" id="experience">
+      <Reveal>
       <div className="relative w-full rounded-3xl overflow-hidden border-2 border-salmon-400/40 shadow-[0_16px_40px_rgba(242,116,104,0.15)] group">
         <img
           alt={t.experience.alt}
@@ -34,6 +36,7 @@ export function Experience() {
           </div>
         </div>
       </div>
+      </Reveal>
     </section>
   )
 }

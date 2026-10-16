@@ -1,5 +1,6 @@
 import { useApp } from '../context'
 import { Icon } from './Icon'
+import { Reveal } from './Reveal'
 
 export function TrustedNetwork() {
   const { t } = useApp()
@@ -21,6 +22,7 @@ export function TrustedNetwork() {
   return (
     <section className="page-shell py-20" id="trusted-partners">
       <div className="p-8 sm:p-12 rounded-3xl bg-white dark:bg-dark-card border-2 border-salmon-400/35 shadow-[0_12px_36px_rgba(242,116,104,0.12)] flex flex-col gap-10">
+        <Reveal>
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-slate-200 dark:border-dark-border">
           <div>
             <span className="px-3.5 py-1.5 rounded-full bg-salmon-500/15 border border-salmon-400/30 text-xs font-bold text-salmon-700 dark:text-salmon-300 uppercase tracking-wider">
@@ -38,12 +40,13 @@ export function TrustedNetwork() {
             <span>{t.trusted.registry}</span>
           </div>
         </div>
+        </Reveal>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {metrics.map((metric) => (
+          {metrics.map((metric, index) => (
+            <Reveal className="h-full" delay={index * 80} key={metric.label}>
             <div
-              key={metric.label}
-              className="p-6 rounded-2xl bg-slate-50 dark:bg-dark-card-soft border border-salmon-400/30 flex flex-col justify-between"
+              className="h-full p-6 rounded-2xl bg-slate-50 dark:bg-dark-card-soft border border-salmon-400/30 flex flex-col justify-between"
             >
               <div>
                 <Icon name={metric.icon} className="text-salmon-500 text-3xl" />
@@ -56,6 +59,7 @@ export function TrustedNetwork() {
               </div>
               <p className={`text-xs font-semibold mt-3 ${metric.hintClass}`}>{metric.hint}</p>
             </div>
+            </Reveal>
           ))}
         </div>
 
@@ -64,10 +68,10 @@ export function TrustedNetwork() {
             {t.trusted.categoriesTitle}
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-            {t.trusted.categories.map((category) => (
+            {t.trusted.categories.map((category, index) => (
+              <Reveal className="h-full" delay={index * 60} key={category.title}>
               <div
-                key={category.title}
-                className="p-4 rounded-2xl bg-white dark:bg-dark-card border border-slate-200/90 dark:border-dark-border flex items-center gap-3"
+                className="h-full p-4 rounded-2xl bg-white dark:bg-dark-card border border-slate-200/90 dark:border-dark-border flex items-center gap-3"
               >
                 <div className="w-10 h-10 rounded-xl bg-salmon-100/70 dark:bg-salmon-950/60 text-salmon-600 dark:text-salmon-400 flex items-center justify-center shrink-0">
                   <Icon name={category.icon} className="text-[22px]" />
@@ -79,6 +83,7 @@ export function TrustedNetwork() {
                   <span className="text-[11px] text-slate-500 dark:text-slate-400">{category.hint}</span>
                 </div>
               </div>
+              </Reveal>
             ))}
           </div>
         </div>

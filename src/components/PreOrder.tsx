@@ -12,6 +12,7 @@ import {
 } from '../lib/countries'
 import { GOOGLE_FORM_OPTIONS, submitGoogleForm } from '../lib/googleForm'
 import { Icon } from './Icon'
+import { Reveal } from './Reveal'
 
 type Persona = 'merchant' | 'customer' | 'opportunity'
 type FieldErrors = Partial<Record<'name' | 'email' | 'phone' | 'country' | 'gender' | 'details', string>>
@@ -118,7 +119,8 @@ export function PreOrder() {
     >
       <div className="page-shell">
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-10 xl:gap-14 items-start">
-            <div className="xl:col-span-5 flex flex-col gap-6 xl:sticky xl:top-28">
+            <Reveal className="xl:col-span-5">
+            <div className="flex flex-col gap-6 xl:sticky xl:top-28">
               <div className="flex items-center gap-3">
                 <img
                   alt={t.logoAlt}
@@ -159,8 +161,10 @@ export function PreOrder() {
                 </p>
               </div>
             </div>
+            </Reveal>
 
-            <div className="xl:col-span-7">
+            <Reveal className="xl:col-span-7" delay={120}>
+            <div>
               <div className="rounded-3xl bg-white dark:bg-dark-card border border-slate-200/90 dark:border-dark-border shadow-[0_18px_48px_rgba(15,23,42,0.08)] p-6 sm:p-8 lg:p-10 flex flex-col gap-7">
               {submitted ? (
                 <div
@@ -399,6 +403,7 @@ export function PreOrder() {
               )}
               </div>
             </div>
+            </Reveal>
         </div>
       </div>
     </section>
