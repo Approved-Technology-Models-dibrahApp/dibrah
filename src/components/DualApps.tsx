@@ -1,12 +1,14 @@
 import { useApp } from '../context'
 import { withBase } from '../lib/paths'
 import { Icon } from './Icon'
+import { Reveal } from './Reveal'
 
 export function DualApps() {
   const { t } = useApp()
 
   return (
     <section className="page-shell py-20" id="mobile-apps">
+      <Reveal>
       <div className="flex flex-col gap-3 text-center max-w-3xl mx-auto mb-14">
         <span className="px-4 py-1.5 rounded-full bg-gradient-to-r from-salmon-400/20 to-salmon-500/20 border border-salmon-400/40 font-label-sm text-xs text-salmon-700 dark:text-salmon-300 font-bold uppercase tracking-wider mx-auto">
           {t.dual.kicker}
@@ -16,10 +18,12 @@ export function DualApps() {
         </h2>
         <p className="text-slate-600 dark:text-slate-300 text-base">{t.dual.subtitle}</p>
       </div>
+      </Reveal>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <Reveal className="h-full" delay={80}>
         <div
-          className="flex flex-col justify-between p-8 sm:p-10 rounded-3xl bg-white dark:bg-dark-card border-2 border-salmon-400/35 dark:border-salmon-400/30 shadow-[0_8px_30px_rgba(242,116,104,0.1)] hover:shadow-[0_12px_40px_rgba(242,116,104,0.2)] transition-all"
+          className="h-full flex flex-col justify-between p-8 sm:p-10 rounded-3xl bg-white dark:bg-dark-card border-2 border-salmon-400/35 dark:border-salmon-400/30 shadow-[0_8px_30px_rgba(242,116,104,0.1)] hover:shadow-[0_12px_40px_rgba(242,116,104,0.2)] transition-all"
           id="for-businesses"
         >
           <div className="flex flex-col gap-6">
@@ -64,9 +68,11 @@ export function DualApps() {
             </a>
           </div>
         </div>
+        </Reveal>
 
+        <Reveal className="h-full" delay={180}>
         <div
-          className="flex flex-col justify-between p-8 sm:p-10 rounded-3xl bg-white dark:bg-dark-card border-2 border-slate-200/80 dark:border-dark-border shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:border-salmon-400/40 transition-all"
+          className="h-full flex flex-col justify-between p-8 sm:p-10 rounded-3xl bg-white dark:bg-dark-card border-2 border-slate-200/80 dark:border-dark-border shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:border-salmon-400/40 transition-all"
           id="for-shoppers"
         >
           <div className="flex flex-col gap-6">
@@ -111,6 +117,7 @@ export function DualApps() {
             </a>
           </div>
         </div>
+        </Reveal>
       </div>
     </section>
   )

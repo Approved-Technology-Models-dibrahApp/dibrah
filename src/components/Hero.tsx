@@ -1,6 +1,7 @@
 import logo from '../assets/dibrah-logo.jpg'
 import { useApp } from '../context'
 import { Icon } from './Icon'
+import { Reveal } from './Reveal'
 
 export function Hero() {
   const { t } = useApp()
@@ -11,7 +12,7 @@ export function Hero() {
       <div className="absolute top-96 -right-10 w-[420px] h-[420px] bg-salmon-400/20 dark:bg-salmon-500/15 rounded-full blur-3xl -z-10 pointer-events-none" />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-start">
-        <div className="lg:col-span-7 flex flex-col gap-6">
+        <Reveal className="lg:col-span-7 flex flex-col gap-6">
           <div className="inline-flex flex-wrap items-center gap-2.5 self-start max-w-full px-4 py-1.5 rounded-full bg-white dark:bg-dark-card border border-salmon-500/30 dark:border-salmon-400/30 shadow-[0_2px_12px_rgba(242,116,104,0.15)]">
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-success animate-pulse" />
             <span className="font-label-md text-sm text-charcoal-pure dark:text-slate-200 font-bold">
@@ -71,9 +72,9 @@ export function Hero() {
               </div>
             ))}
           </div>
-        </div>
+        </Reveal>
 
-        <div className="lg:col-span-5 relative lg:self-end">
+        <Reveal className="lg:col-span-5 relative lg:self-end" delay={140}>
           <div className="absolute inset-0 bg-gradient-to-tr from-salmon-400/30 via-primary-container/20 to-transparent rounded-3xl blur-2xl -z-10" />
           <div className="relative w-full rounded-3xl bg-white dark:bg-dark-card p-6 border-2 border-salmon-400/40 dark:border-salmon-400/30 shadow-[0_16px_40px_rgba(242,116,104,0.18)]">
             <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-dark-border">
@@ -187,7 +188,7 @@ export function Hero() {
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   )

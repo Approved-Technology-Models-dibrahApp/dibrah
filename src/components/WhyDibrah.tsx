@@ -1,5 +1,6 @@
 import { useApp } from '../context'
 import { Icon } from './Icon'
+import { Reveal } from './Reveal'
 
 export function WhyDibrah() {
   const { t } = useApp()
@@ -10,6 +11,7 @@ export function WhyDibrah() {
       id="why-dibrah"
     >
       <div className="page-shell">
+        <Reveal>
         <div className="text-center max-w-2xl mx-auto pb-14">
           <span className="px-4 py-1.5 rounded-full bg-gradient-to-r from-salmon-400/20 to-salmon-500/20 border border-salmon-400/40 font-label-sm text-xs text-salmon-700 dark:text-salmon-300 font-bold uppercase tracking-wider">
             {t.why.kicker}
@@ -19,9 +21,11 @@ export function WhyDibrah() {
           </h2>
           <p className="text-slate-600 dark:text-slate-300 mt-2">{t.why.subtitle}</p>
         </div>
+        </Reveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          <div className="lg:col-span-6 flex flex-col justify-between p-8 sm:p-10 rounded-3xl bg-slate-50 dark:bg-dark-card-soft border border-slate-200 dark:border-dark-border shadow-sm">
+          <Reveal className="lg:col-span-6 h-full" delay={80}>
+          <div className="h-full flex flex-col justify-between p-8 sm:p-10 rounded-3xl bg-slate-50 dark:bg-dark-card-soft border border-slate-200 dark:border-dark-border shadow-sm">
             <div className="flex flex-col gap-4">
               <div className="w-12 h-12 rounded-2xl bg-coral-alert/15 flex items-center justify-center text-coral-alert">
                 <Icon name="warning" className="text-[28px]" />
@@ -42,8 +46,10 @@ export function WhyDibrah() {
               </span>
             </div>
           </div>
+          </Reveal>
 
-          <div className="lg:col-span-6 flex flex-col justify-between p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-charcoal-pure to-[#162032] text-white border-2 border-salmon-400/50 shadow-2xl relative overflow-hidden">
+          <Reveal className="lg:col-span-6 h-full" delay={160}>
+          <div className="h-full flex flex-col justify-between p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-charcoal-pure to-[#162032] text-white border-2 border-salmon-400/50 shadow-2xl relative overflow-hidden">
             <div className="absolute -right-16 -top-16 w-64 h-64 rounded-full bg-salmon-400/20 blur-3xl pointer-events-none" />
             <div className="relative z-10 flex flex-col gap-6">
               <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-salmon-400 to-salmon-500 flex items-center justify-center text-charcoal-pure shadow-lg shadow-salmon-500/30">
@@ -89,6 +95,7 @@ export function WhyDibrah() {
               </a>
             </div>
           </div>
+          </Reveal>
         </div>
       </div>
     </section>

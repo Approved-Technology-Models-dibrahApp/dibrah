@@ -234,7 +234,7 @@ html[dir="rtl"] .country-select {
 @keyframes biz-reveal {
   from {
     opacity: 0;
-    transform: translate3d(0, 28px, 0);
+    transform: translate3d(0, 32px, 0);
   }
   to {
     opacity: 1;
@@ -253,12 +253,14 @@ html[dir="rtl"] .country-select {
 
 .biz-reveal {
   opacity: 0;
-  transform: translate3d(0, 28px, 0);
+  transform: translate3d(0, 32px, 0);
+  will-change: opacity, transform;
 }
 
 .biz-reveal.is-in {
-  animation: biz-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: biz-reveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   animation-delay: var(--biz-delay, 0ms);
+  will-change: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useApp } from '../context'
 import { Icon } from './Icon'
+import { Reveal } from './Reveal'
 
 type TabId = 'merchants' | 'customers' | 'suppliers'
 
@@ -34,6 +35,7 @@ export function Capabilities() {
       id="we-offer"
     >
       <div className="page-shell">
+        <Reveal>
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12">
           <div>
             <span className="px-4 py-1.5 rounded-full bg-white dark:bg-dark-card border border-salmon-400/40 text-xs font-bold text-salmon-700 dark:text-salmon-300 uppercase tracking-wider">
@@ -63,12 +65,13 @@ export function Capabilities() {
             ))}
           </div>
         </div>
+        </Reveal>
 
         <div className={`grid grid-cols-1 md:grid-cols-2 ${columns} gap-6`} role="tabpanel">
-          {items.map((card) => (
+          {items.map((card, index) => (
+            <Reveal className="h-full" delay={index * 70} key={card.title}>
             <div
-              key={card.title}
-              className="p-6 rounded-2xl bg-white dark:bg-dark-card border border-salmon-400/20 shadow-sm flex flex-col gap-2 hover:border-salmon-400 transition-colors"
+              className="h-full p-6 rounded-2xl bg-white dark:bg-dark-card border border-salmon-400/20 shadow-sm flex flex-col gap-2 hover:border-salmon-400 transition-colors"
             >
               <div className="w-10 h-10 rounded-xl bg-salmon-50 dark:bg-salmon-950/40 text-salmon-600 dark:text-salmon-400 flex items-center justify-center mb-2">
                 <Icon name={card.icon} className="text-[24px]" />
@@ -76,6 +79,7 @@ export function Capabilities() {
               <h3 className="text-base text-charcoal-pure dark:text-white font-bold">{card.title}</h3>
               <p className="text-sm text-slate-600 dark:text-slate-400">{card.body}</p>
             </div>
+            </Reveal>
           ))}
         </div>
       </div>

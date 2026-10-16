@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useRef, type CSSProperties, type ReactNode } from 'react'
+import { useLayoutEffect } from 'react'
 import logo from '../assets/dibrah-logo.jpg'
 import { useApp } from '../context'
 import { withBase } from '../lib/paths'
@@ -6,43 +6,10 @@ import { jumpToTop } from '../lib/scroll'
 import { Footer } from './Footer'
 import { Header } from './Header'
 import { Icon } from './Icon'
+import { Reveal } from './Reveal'
 
 function stepMark(n: string) {
   return n.padStart(2, '0')
-}
-
-function Reveal({
-  children,
-  className = '',
-  delay = 0,
-}: {
-  children: ReactNode
-  className?: string
-  delay?: number
-}) {
-  const ref = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add('is-in')
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.16, rootMargin: '0px 0px -8% 0px' },
-    )
-    observer.observe(el)
-    return () => observer.disconnect()
-  }, [])
-
-  return (
-    <div className={`biz-reveal ${className}`} ref={ref} style={{ '--biz-delay': `${delay}ms` } as CSSProperties}>
-      {children}
-    </div>
-  )
 }
 
 export function BusinessPage() {
