@@ -6,7 +6,6 @@ import { Icon } from './Icon'
 
 const NAV_LINKS = [
   { href: '#why-dibrah', key: 'why' as const },
-  { href: '#mobile-apps', key: 'apps' as const },
   { href: '#we-offer', key: 'offer' as const },
   { href: '#trusted-partners', key: 'partners' as const },
   { href: '#pre-order', key: 'contact' as const },

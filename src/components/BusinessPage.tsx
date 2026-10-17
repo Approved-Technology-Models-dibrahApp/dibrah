@@ -1,5 +1,7 @@
 import { useLayoutEffect } from 'react'
 import logo from '../assets/dibrah-logo.jpg'
+import qrGenerate from '../assets/qr-generate.jpg'
+import qrShare from '../assets/qr-share.jpg'
 import { useApp } from '../context'
 import { withBase } from '../lib/paths'
 import { jumpToTop } from '../lib/scroll'
@@ -8,8 +10,13 @@ import { Header } from './Header'
 import { Icon } from './Icon'
 import { Reveal } from './Reveal'
 
+const STEP_IMAGES: Record<string, string> = {
+  '6.1': qrGenerate,
+  '6.2': qrShare,
+}
+
 function stepMark(n: string) {
-  return n.padStart(2, '0')
+  return n.includes('.') ? n : n.padStart(2, '0')
 }
 
 export function BusinessPage() {
@@ -163,12 +170,19 @@ export function BusinessPage() {
                                   <p className="mt-3 text-sm sm:text-[15px] text-slate-600 dark:text-slate-300 leading-relaxed">
                                     {step.body}
                                   </p>
+                                  {STEP_IMAGES[step.n] ? (
+                                    <img
+                                      alt=""
+                                      className="mt-5 w-full rounded-2xl border border-slate-200/80 dark:border-dark-border object-cover"
+                                      src={STEP_IMAGES[step.n]}
+                                    />
+                                  ) : null}
                                 </div>
                               </div>
                             </article>
                           </Reveal>
                         </div>
-                        <div className="hidden md:flex md:order-2 relative z-10 mt-6 w-14 h-14 rounded-2xl bg-gradient-to-br from-salmon-400 to-salmon-500 text-charcoal-pure font-black text-lg tabular-nums items-center justify-center shadow-[0_8px_20px_rgba(242,116,104,0.35)] justify-self-center">
+                        <div className="hidden md:flex md:order-2 relative z-10 mt-6 min-w-14 h-14 px-2 rounded-2xl bg-gradient-to-br from-salmon-400 to-salmon-500 text-charcoal-pure font-black text-base tabular-nums items-center justify-center shadow-[0_8px_20px_rgba(242,116,104,0.35)] justify-self-center">
                           {stepMark(step.n)}
                         </div>
                         <div className={`hidden md:block ${onStart ? 'md:order-3' : 'md:order-1'}`} />
@@ -180,26 +194,6 @@ export function BusinessPage() {
             </div>
           </section>
         ))}
-
-        <section className="page-shell pb-8 scroll-mt-[10rem]" id="step-10">
-          <Reveal>
-            <article className="max-w-3xl p-6 sm:p-8 rounded-[28px] bg-white dark:bg-dark-card border border-slate-200/90 dark:border-dark-border shadow-[0_10px_32px_rgba(15,23,42,0.05)]">
-              <div className="flex items-start gap-5">
-                <span className="w-14 h-14 rounded-2xl bg-gradient-to-br from-salmon-400 to-salmon-500 text-charcoal-pure font-black text-lg tabular-nums flex items-center justify-center shrink-0 shadow-[0_8px_20px_rgba(242,116,104,0.35)]">
-                  10
-                </span>
-                <div className="min-w-0">
-                  <h2 className="text-xl sm:text-2xl font-bold font-headline-lg text-charcoal-pure dark:text-white tracking-tight">
-                    {t.business.moreTitle}
-                  </h2>
-                  <p className="mt-3 text-sm sm:text-[15px] text-slate-600 dark:text-slate-300 leading-relaxed">
-                    {t.business.moreBody}
-                  </p>
-                </div>
-              </div>
-            </article>
-          </Reveal>
-        </section>
 
         <section className="page-shell pb-16 sm:pb-20">
           <Reveal>

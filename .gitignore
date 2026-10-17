@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Unused local originals; the site uses src/assets/dibrah-logo.jpg
+public/dibrah-form-header.jpg
+public/dibrah-logo.jpg

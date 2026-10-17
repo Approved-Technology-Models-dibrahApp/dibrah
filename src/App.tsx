@@ -1,6 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
 import { Capabilities } from './components/Capabilities'
-import { DualApps } from './components/DualApps'
 import { Experience } from './components/Experience'
 import { BusinessPage } from './components/BusinessPage'
 import { Footer } from './components/Footer'
@@ -40,7 +39,6 @@ function LandingPage() {
           <Hero />
           <Experience />
           <WhyDibrah />
-          <DualApps />
           <Capabilities />
           <TrustedNetwork />
           <PreOrder />
