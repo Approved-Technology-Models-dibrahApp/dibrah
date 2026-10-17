@@ -108,10 +108,7 @@ function Router() {
     } else if (path === '/for-business') {
       document.title = lang === 'ar' ? 'ابدأ مع دِبرة | دِبــرة' : 'Start with Dibrah | dibrah'
     } else {
-      document.title =
-        lang === 'ar'
-          ? 'دِبــرة - تمكين المنشآت وإثراء تجربة العملاء'
-          : 'dibrah - Empowering SMEs & Enriching Customer Experience'
+      document.title = 'dibrah دِبــرة'
     }
   }, [path, lang])
 
