@@ -30,7 +30,21 @@ const mobileNavLinkClass = (active: boolean) =>
   ].join(' ')
 
 function hrefFromScroll() {
+  const doc = document.documentElement
+  const nearBottom = window.innerHeight + window.scrollY >= doc.scrollHeight - 24
+  if (nearBottom) return NAV_LINKS[NAV_LINKS.length - 1].href
+
   let current = ''
+  for (const link of NAV_LINKS) {
+    const el = document.getElementById(link.href.slice(1))
+    if (!el) continue
+    const rect = el.getBoundingClientRect()
+    if (rect.top <= HEADER_LINE && rect.bottom > HEADER_LINE) {
+      current = link.href
+    }
+  }
+  if (current) return current
+
   for (const link of NAV_LINKS) {
     const el = document.getElementById(link.href.slice(1))
     if (el && el.getBoundingClientRect().top <= HEADER_LINE) {
@@ -79,12 +93,22 @@ export function Header() {
       if (next) setActiveHref(next)
     }
 
+    const onNavLock = (event: Event) => {
+      const href = (event as CustomEvent<string>).detail
+      if (!href) return
+      clearSettleTimer()
+      lockedHref.current = href
+      setActiveHref(href)
+    }
+
     window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('scrollend', unlockClick)
+    window.addEventListener('dibrah:nav', onNavLock)
     onScroll()
     return () => {
       window.removeEventListener('scroll', onScroll)
       window.removeEventListener('scrollend', unlockClick)
+      window.removeEventListener('dibrah:nav', onNavLock)
       clearSettleTimer()
     }
   }, [])

@@ -5,8 +5,6 @@ export const COMPANY_EN = 'Approved Technology Models LLC'
 export const COMPANY_AR = 'شركة النماذج التقنية المعتمدة'
 export const COMPANY_ADDRESS =
   'Address 3668, Al Qairawan Dist, Riyadh, Postal code 13532, Saudi Arabia'
-export const COMMERCIAL_REGISTRY = 'Kingdom Commercial Registry #1010834241'
-
 export const copy = {
   en: {
     skip: 'Skip to content',
@@ -32,7 +30,7 @@ export const copy = {
       subheading:
         'dibrah is an innovative, AI-ready platform developed by Approved Technology Models Company, connecting customers, merchants, and suppliers through a unique local discovery and marketing ecosystem designed to empower small and medium-sized enterprises (SMEs). It enables customers to discover, save, and earn rewards, while helping businesses attract and retain customers, manage offers and loyalty programs, access exclusive supplier deals, and gain real-time insights into customer visits, campaign engagement, and business performance.',
       ctaPrimary: 'Download Business App',
-      ctaSecondary: 'Explore Customer App',
+      ctaSecondary: 'Download User App',
       proofs: [
         { icon: 'loyalty', title: 'Loyalty Program', sub: 'Repeat visits without plastic cards' },
         { icon: 'storefront', title: 'B2B Supplier Hub', sub: 'Wholesale restock in-app' },
@@ -83,9 +81,9 @@ export const copy = {
       alt: 'Saudi business owner and customer in a modern Riyadh retail café, using a tablet and smartphone',
     },
     why: {
-      kicker: 'Strategic Assessment',
+      kicker: 'Strategic Challenges',
       title: 'Why should I join dibrah?',
-      subtitle: 'Bridging the critical capability divide for local enterprises across Saudi Arabia.',
+      subtitle: 'Explore some of the many challenges businesses face and discover how Dibrah helps overcome them.',
       challengeLabel: 'The Reality Facing Retail & Service SMEs',
       challenge:
         '“Small and medium-sized enterprises (SMEs), hotels, clinics, and all types of stores are constantly looking to increase their sales and find effective tools for marketing and customer relationship management. According to studies, many fail due to marketing neglect, random marketing efforts, or the high cost of hiring a dedicated team, while lower-quality competitors may succeed simply due to stronger marketing capabilities, customer relations, and new customer acquisition.”',
@@ -108,8 +106,8 @@ export const copy = {
       cohort: 'Join our Riyadh Pilot cohort',
       reserve: 'Reserve Activation',
       questions: [
-        { icon: 'person_search', title: 'Do you really know your customers?' },
-        { icon: 'trending_down', title: 'How many customers never return?' },
+        { icon: 'person_search', title: 'Do you know your customers and which ones return?' },
+        { icon: 'person_add', title: 'Are you seeking to acquire new clients?' },
         { icon: 'payments', title: 'Is your marketing actually profitable?' },
         { icon: 'favorite', title: 'Are you turning visitors into loyal customers?' },
         { icon: 'campaign', title: 'Still wasting money on influencers and random ads?' },
@@ -150,9 +148,9 @@ export const copy = {
           body: 'Create and publish personalized offers for customers and app visitors during off-peak hours.',
         },
         {
-          icon: 'loyalty',
-          title: 'Tailored Loyalty Program',
-          body: 'Launch a frictionless loyalty program to reward repeat customers without the hassle of plastic cards or stamps.',
+          icon: 'person_add',
+          title: 'Attract New Customers',
+          body: 'Grow your customer base by increasing your business visibility and reaching new potential customers.',
         },
       ],
       customers: [
@@ -215,7 +213,6 @@ export const copy = {
       title: 'Validated Reach Across Saudi Arabia',
       subtitle:
         'A growing nationwide alliance connecting neighborhood stores, wholesale suppliers, and loyal consumers.',
-      registry: COMMERCIAL_REGISTRY,
       m1Label: 'Trusted Businesses',
       m1Value: '100+',
       m1Hint: 'Verified Local Stores & SMEs',
@@ -422,7 +419,7 @@ export const copy = {
       subheading:
         'دِبرة منصة مبتكرة جاهزة للذكاء الاصطناعي طورتها شركة النماذج التقنية المعتمدة، تربط العملاء والتجار والموردين عبر منظومة فريدة للاكتشاف والتسويق المحلي صُممت لتمكين المنشآت الصغيرة والمتوسطة. تمكّن العملاء من الاكتشاف والتوفير وكسب المكافآت، وتساعد المنشآت على جذب العملاء والاحتفاظ بهم، وإدارة العروض وبرامج الولاء، والوصول إلى صفقات موردين حصرية، والحصول على رؤى لحظية عن زيارات العملاء وتفاعل الحملات وأداء العمل.',
       ctaPrimary: 'حمّل تطبيق التجار',
-      ctaSecondary: 'استكشف تطبيق العملاء',
+      ctaSecondary: 'نزّل تطبيق المستخدم',
       proofs: [
         { icon: 'loyalty', title: 'برنامج الولاء', sub: 'زيارات متكررة دون بطاقات بلاستيكية' },
         { icon: 'storefront', title: 'منصة موردي الأعمال', sub: 'إعادة تخزين بالجملة داخل التطبيق' },
@@ -473,9 +470,9 @@ export const copy = {
       alt: 'صاحب عمل سعودي وزبونة في مقهى تجاري حديث بالرياض يستخدمان جهاز لوحي وهاتف ذكي',
     },
     why: {
-      kicker: 'تقييم استراتيجي',
+      kicker: 'التحديات الاستراتيجية',
       title: 'لماذا أنضم إلى دِبرة؟',
-      subtitle: 'سد الفجوة في القدرات للمنشآت المحلية في أنحاء المملكة العربية السعودية.',
+      subtitle: 'استكشف بعض التحديات العديدة التي تواجه المنشآت واكتشف كيف تساعد دِبرة في التغلب عليها.',
       challengeLabel: 'الواقع الذي تواجهه منشآت التجزئة والخدمات',
       challenge:
         '«تبحث المنشآت الصغيرة والمتوسطة والفنادق والعيادات وجميع أنواع المتاجر باستمرار عن زيادة مبيعاتها وإيجاد أدوات فعّالة للتسويق وإدارة علاقات العملاء. ووفقاً للدراسات، يفشل كثير منها بسبب إهمال التسويق أو الجهود العشوائية أو ارتفاع تكلفة توظيف فريق متخصص، بينما قد ينجح منافسون أقل جودة بفضل قدرات تسويقية أقوى وعلاقات عملاء واكتساب عملاء جدد.»',
@@ -497,8 +494,8 @@ export const copy = {
       cohort: 'انضم إلى مجموعة الرياض التجريبية',
       reserve: 'احجز التفعيل',
       questions: [
-        { icon: 'person_search', title: 'هل تعرف عملاءك حقاً؟' },
-        { icon: 'trending_down', title: 'كم عميلاً لا يعود إليك؟' },
+        { icon: 'person_search', title: 'هل تعرف عملاءك ومن منهم يعود؟' },
+        { icon: 'person_add', title: 'هل تسعى لاكتساب عملاء جدد؟' },
         { icon: 'payments', title: 'هل تسويقك مربح فعلاً؟' },
         { icon: 'favorite', title: 'هل تحول الزوار إلى عملاء أوفياء؟' },
         { icon: 'campaign', title: 'أما زلت تهدر المال على المؤثرين والإعلانات العشوائية؟' },
@@ -539,9 +536,9 @@ export const copy = {
           body: 'أنشئ وانشر عروضاً مخصصة للعملاء وزوار التطبيق في ساعات انخفاض الإقبال.',
         },
         {
-          icon: 'loyalty',
-          title: 'برنامج ولاء مخصص',
-          body: 'أطلق برنامج ولاء سلساً لمكافأة العملاء المتكررين دون بطاقات بلاستيكية أو أختام.',
+          icon: 'person_add',
+          title: 'جذب عملاء جدد',
+          body: 'نمِّ قاعدة عملائك بزيادة ظهور منشأتك والوصول إلى عملاء محتملين جدد.',
         },
       ],
       customers: [
@@ -603,7 +600,6 @@ export const copy = {
       kicker: 'شبكة موثوقة ومنظومة تجارية',
       title: 'انتشار موثّق عبر المملكة العربية السعودية',
       subtitle: 'تحالف وطني متنامٍ يربط متاجر الأحياء وموردي الجملة والمستهلكين الأوفياء.',
-      registry: 'السجل التجاري للمملكة #1010834241',
       m1Label: 'منشآت موثوقة',
       m1Value: '100+',
       m1Hint: 'متاجر ومنشآت محلية موثّقة',
@@ -635,7 +631,7 @@ export const copy = {
       personaMerchantHint: 'تطبيق التجار والموردين',
       personaCustomerTitle: 'العملاء والمتسوقون',
       personaCustomerHint: 'تطبيق الزبائن',
-      personaOpportunityTitle: 'فرصة أعمال',
+      personaOpportunityTitle: 'فرصة عمل',
       personaOpportunityHint: 'شراكة أو استثمار أو تعاون',
       nameLabelMerchant: 'الاسم الكامل',
       namePlaceholderMerchant: 'مثال: مقهى النخيل المختص',

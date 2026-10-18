@@ -40,9 +40,9 @@ export function Hero() {
               <span>{t.hero.ctaPrimary}</span>
               <Icon name="download" className="text-[20px] font-bold" />
             </div>
-            <div className="inline-flex items-center justify-center gap-2.5 w-full px-7 py-3.5 rounded-full font-label-lg text-white font-bold bg-charcoal-pure dark:bg-[#1a2332] shadow-md cursor-default select-none">
+            <div className="inline-flex items-center justify-center gap-2.5 w-full px-7 py-3.5 rounded-full font-label-lg text-charcoal-pure font-bold bg-gradient-to-r from-salmon-400 via-primary-container to-salmon-500 shadow-[0_8px_24px_rgba(242,116,104,0.42)] cursor-default select-none">
               <span>{t.hero.ctaSecondary}</span>
-              <Icon name="download" className="text-salmon-400 text-[20px] font-bold" />
+              <Icon name="download" className="text-[20px] font-bold" />
             </div>
           </div>
 

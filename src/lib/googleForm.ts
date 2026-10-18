@@ -16,7 +16,7 @@ export const GOOGLE_FORM_OPTIONS = {
   genderFemale: 'أنثى / Female',
   merchant: 'تاجر / Merchant',
   customer: 'زبون / Customer',
-  opportunity: 'فرصة أعمال / Business Opportunity',
+  opportunity: 'فرصة عمل / Business Opportunity',
 } as const
 
 export type AccountType = 'merchant' | 'customer' | 'opportunity'

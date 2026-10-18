@@ -12,7 +12,7 @@ export function WhyDibrah() {
     >
       <div className="page-shell">
         <Reveal>
-        <div className="text-center max-w-2xl mx-auto pb-14">
+        <div className="text-center max-w-3xl mx-auto pb-14">
           <span className="px-4 py-1.5 rounded-full bg-gradient-to-r from-salmon-400/20 to-salmon-500/20 border border-salmon-400/40 font-label-sm text-xs text-salmon-700 dark:text-salmon-300 font-bold uppercase tracking-wider">
             {t.why.kicker}
           </span>

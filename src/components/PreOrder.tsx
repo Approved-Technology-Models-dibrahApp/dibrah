@@ -99,6 +99,10 @@ export function PreOrder() {
       setDetails('')
       setCountryId(detectedCountry)
       setFieldErrors({})
+      window.dispatchEvent(new CustomEvent('dibrah:nav', { detail: '#pre-order' }))
+      requestAnimationFrame(() => {
+        document.getElementById('pre-order')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      })
     } catch {
       setError(t.preorder.submitFailed)
     } finally {

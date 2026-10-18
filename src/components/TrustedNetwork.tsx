@@ -35,10 +35,6 @@ export function TrustedNetwork() {
               {t.trusted.subtitle}
             </p>
           </div>
-          <div className="flex items-center gap-2 self-start md:self-auto px-4 py-2 rounded-2xl bg-salmon-500/10 border border-salmon-400/30 text-salmon-700 dark:text-salmon-300 text-xs font-bold">
-            <Icon name="verified_user" className="text-[18px]" />
-            <span>{t.trusted.registry}</span>
-          </div>
         </div>
         </Reveal>
 
