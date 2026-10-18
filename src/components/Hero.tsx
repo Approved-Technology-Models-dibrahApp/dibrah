@@ -35,12 +35,12 @@ export function Hero() {
             {t.hero.subheading}
           </p>
 
-          <div className="flex flex-col gap-3 pt-2 max-w-xl">
-            <div className="inline-flex items-center justify-center gap-2.5 w-full px-7 py-3.5 rounded-full font-label-lg text-charcoal-pure font-bold bg-gradient-to-r from-salmon-400 via-primary-container to-salmon-500 shadow-[0_8px_24px_rgba(242,116,104,0.42)] cursor-default select-none">
+          <div className="flex flex-col lg:flex-row gap-3 pt-2 max-w-xl lg:max-w-none">
+            <div className="inline-flex items-center justify-center gap-2.5 w-full lg:flex-1 px-7 py-3.5 rounded-full font-label-lg text-charcoal-pure font-bold bg-gradient-to-r from-salmon-400 via-primary-container to-salmon-500 shadow-[0_8px_24px_rgba(242,116,104,0.42)] cursor-default select-none">
               <span>{t.hero.ctaPrimary}</span>
               <Icon name="download" className="text-[20px] font-bold" />
             </div>
-            <div className="inline-flex items-center justify-center gap-2.5 w-full px-7 py-3.5 rounded-full font-label-lg text-charcoal-pure font-bold bg-gradient-to-r from-salmon-400 via-primary-container to-salmon-500 shadow-[0_8px_24px_rgba(242,116,104,0.42)] cursor-default select-none">
+            <div className="inline-flex items-center justify-center gap-2.5 w-full lg:flex-1 px-7 py-3.5 rounded-full font-label-lg text-charcoal-pure font-bold bg-gradient-to-r from-salmon-400 via-primary-container to-salmon-500 shadow-[0_8px_24px_rgba(242,116,104,0.42)] cursor-default select-none">
               <span>{t.hero.ctaSecondary}</span>
               <Icon name="download" className="text-[20px] font-bold" />
             </div>
