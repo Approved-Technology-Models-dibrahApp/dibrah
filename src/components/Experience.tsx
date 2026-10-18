@@ -3,36 +3,86 @@ import { useApp } from '../context'
 import { Icon } from './Icon'
 import { Reveal } from './Reveal'
 
+function ExperienceStory({
+  t,
+}: {
+  t: ReturnType<typeof useApp>['t']
+}) {
+  return (
+    <div className="flex flex-col px-5 pb-7 pt-0 sm:px-10 sm:pb-10 lg:px-12 lg:pb-12 lg:pt-6">
+      <div className="inline-flex items-center gap-2 self-start px-4 py-1.5 rounded-full bg-salmon-500 text-charcoal-pure font-bold text-xs shadow-lg uppercase tracking-wider mb-3">
+        <Icon name="verified" className="text-[16px] font-bold" />
+        <span>{t.experience.badge}</span>
+      </div>
+      <h2 className="text-2xl sm:text-3xl lg:text-4xl text-white font-extrabold tracking-tight max-w-3xl leading-tight font-headline-lg drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
+        {t.experience.title}
+      </h2>
+      <p className="text-white text-sm sm:text-base max-w-3xl mt-2 leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.75)]">
+        {t.experience.body}
+      </p>
+      <div className="grid grid-cols-1 gap-2.5 pt-5 mt-2 border-t border-white/20 lg:grid-cols-2 lg:gap-x-16">
+        <div className="flex flex-col gap-2.5">
+          {t.experience.features.slice(0, 3).map((item) => (
+            <div key={item} className="flex items-start gap-2.5 text-white">
+              <span className="w-2.5 h-2.5 mt-1.5 rounded-full bg-salmon-400 shrink-0" />
+              <span className="text-xs sm:text-sm font-semibold leading-snug">{item}</span>
+            </div>
+          ))}
+          <div className="flex flex-col gap-2.5 lg:hidden">
+            {t.experience.features.slice(3).map((item) => (
+              <div key={item} className="flex items-start gap-2.5 text-white">
+                <span className="w-2.5 h-2.5 mt-1.5 rounded-full bg-salmon-400 shrink-0" />
+                <span className="text-xs sm:text-sm font-semibold leading-snug">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="hidden lg:flex lg:flex-col lg:gap-2.5 lg:justify-self-end lg:max-w-sm">
+          {t.experience.features.slice(3).map((item) => (
+            <div key={item} className="flex items-start gap-2.5 text-white">
+              <span className="w-2.5 h-2.5 mt-1.5 rounded-full bg-salmon-400 shrink-0" />
+              <span className="text-xs sm:text-sm font-semibold leading-snug">{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export function Experience() {
   const { t } = useApp()
 
   return (
     <section className="page-shell py-10" id="experience">
       <Reveal>
-      <div className="relative w-full rounded-3xl overflow-hidden border-2 border-salmon-400/40 shadow-[0_16px_40px_rgba(242,116,104,0.15)] group">
-        <img
-          alt={t.experience.alt}
-          className="w-full h-[440px] sm:h-[520px] object-cover object-center group-hover:scale-[1.02] transition-transform duration-700"
-          src={lifestyle}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/35 flex flex-col justify-end p-8 sm:p-12">
-          <div className="inline-flex items-center gap-2 self-start px-4 py-1.5 rounded-full bg-salmon-500 text-charcoal-pure font-bold text-xs shadow-lg uppercase tracking-wider mb-3">
-            <Icon name="verified" className="text-[16px] font-bold" />
-            <span>{t.experience.badge}</span>
+      <div className="relative w-full rounded-3xl overflow-hidden border-2 border-salmon-400/40 bg-black shadow-[0_16px_40px_rgba(242,116,104,0.15)]">
+        <div className="lg:hidden">
+          <div className="relative">
+            <img
+              alt={t.experience.alt}
+              className="h-[300px] w-full object-cover object-center sm:h-[440px]"
+              src={lifestyle}
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent from-30% to-black" />
           </div>
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl text-white font-extrabold tracking-tight max-w-2xl leading-tight font-headline-lg drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
-            {t.experience.title}
-          </h2>
-          <p className="text-white text-sm sm:text-base max-w-2xl mt-2 leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.75)]">
-            {t.experience.body}
-          </p>
-          <div className="flex flex-col gap-2.5 pt-5 mt-2 border-t border-white/20">
-            {t.experience.features.map((item) => (
-              <div key={item} className="flex items-start gap-2.5 text-white">
-                <span className="w-2.5 h-2.5 mt-1.5 rounded-full bg-salmon-400 shrink-0" />
-                <span className="text-xs sm:text-sm font-semibold leading-snug">{item}</span>
-              </div>
-            ))}
+          <div className="relative -mt-[150px] sm:-mt-[220px]">
+            <ExperienceStory t={t} />
+          </div>
+        </div>
+
+        <div className="relative hidden lg:block">
+          <img
+            alt={t.experience.alt}
+            className="absolute inset-0 h-full w-full object-cover object-[center_30%]"
+            src={lifestyle}
+          />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent from-30% via-black/55 via-[52%] to-black/90" />
+          <div className="invisible" aria-hidden>
+            <ExperienceStory t={t} />
+          </div>
+          <div className="relative">
+            <ExperienceStory t={t} />
           </div>
         </div>
       </div>
